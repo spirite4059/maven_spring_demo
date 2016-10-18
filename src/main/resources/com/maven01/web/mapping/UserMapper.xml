@@ -16,6 +16,7 @@
     from t_user
     where id = #{id,jdbcType=INTEGER}
   </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_user
     where id = #{id,jdbcType=INTEGER}
@@ -79,4 +80,24 @@
       create_date = #{createDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="findUserByUsername" resultMap="BaseResultMap" parameterType="java.lang.String" >
+   select 
+   <include refid="Base_Column_List" />
+   from t_user
+   where name = #{name,jdbcType=VARCHAR}
+ </select>
+ 
+ <select id="findRolesByUser" resultType="com.maven01.web.bean.Role" parameterType="java.lang.String" >
+	select r.* from t_role r
+	left join t_user_role ur ON r.id = ur.role_id
+	left join t_user u ON u.id = ur.user_id
+	where u.name = #{userName,jdbcType=VARCHAR}
+ </select>
+  
+  <select id="findPermissionByRoleId" resultType="com.maven01.web.bean.Permission"  parameterType="java.lang.Integer" >
+	select * from t_permission
+	where t_permission.role_id = #{role_id,jdbcType=INTEGER}
+  </select>
+  
 </mapper>
