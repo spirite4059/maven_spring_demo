@@ -204,7 +204,6 @@
 			<version>1.2.2</version>
 		</dependency>
 		
-<<<<<<< HEAD
      	<!-- jsp Template jar -->
         <dependency>
             <groupId>org.freemarker</groupId>
@@ -212,14 +211,6 @@
             <version>2.3.20</version>
         </dependency>
 		
-=======
-    <!-- hibernate验证 -->  
-    <dependency>  
-        <groupId>org.hibernate</groupId>  
-        <artifactId>hibernate-validator</artifactId>  
-        <version>5.0.1.Final</version>  
-    </dependency>  
->>>>>>> b7fe8319a7a8e149af98206bc35d749c04d39150
     </dependencies> 
   
   <build>
