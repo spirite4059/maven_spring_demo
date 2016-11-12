@@ -41,26 +41,13 @@
 			</list>
 		</property>
 	</bean>
-	
-	
-	<!-- shiro的相关注解 -->
-	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
-	
-	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" 
-		  depends-on="lifecycleBeanPostProcessor"/>
-	
-	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
-	    <property name="securityManager" ref="securityManager"/>
-	</bean>
-	    
-	    
+    
     <!-- 视图解析器 -->
     <bean
         class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/view/"></property>
         <property name="suffix" value=".jsp"></property>
     </bean>
-    
     
     <!-- 配置多文件上传 -->
 	<bean id="multipartResolver"
