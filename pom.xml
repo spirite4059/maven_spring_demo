@@ -166,6 +166,31 @@
 			<version>${jackson.version}</version>
 		</dependency>
 		
+		<!-- shrio相关的 -->
+		<dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-core</artifactId>
+		    <version>1.2.1</version>
+		 </dependency>
+		 
+		 <dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-web</artifactId>
+		    <version>1.2.1</version>
+		 </dependency>
+		 
+		 <dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-ehcache</artifactId>
+		    <version>1.2.1</version>
+		 </dependency>
+		 
+		 <dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-spring</artifactId>
+		    <version>1.2.1</version>
+		 </dependency> 
+				
 		<!-- 文件上传 -->
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -179,6 +204,7 @@
 			<version>1.2.2</version>
 		</dependency>
 		
+<<<<<<< HEAD
      	<!-- jsp Template jar -->
         <dependency>
             <groupId>org.freemarker</groupId>
@@ -186,8 +212,16 @@
             <version>2.3.20</version>
         </dependency>
 		
+=======
+    <!-- hibernate验证 -->  
+    <dependency>  
+        <groupId>org.hibernate</groupId>  
+        <artifactId>hibernate-validator</artifactId>  
+        <version>5.0.1.Final</version>  
+    </dependency>  
+>>>>>>> b7fe8319a7a8e149af98206bc35d749c04d39150
     </dependencies> 
-
+  
   <build>
     <finalName></finalName>
     <plugins>
