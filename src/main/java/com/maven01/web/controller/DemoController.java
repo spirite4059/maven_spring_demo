@@ -10,6 +10,6 @@ public class DemoController {
     public String index()
     {
     	System.out.println("这块执行了么");
-        return "/index";
+        return "/web/index";
     }
 }

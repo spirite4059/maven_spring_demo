@@ -14,9 +14,9 @@
 	<title>显示课程和内容</title>
 	
 	<link   rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
-	<link   rel="stylesheet" type="text/css" href="../css/show.css">
+	<link   rel="stylesheet" type="text/css" href=${ctx}"/css/show.css">
 
-    <link href="css/modern-business.css" rel="stylesheet">
+    <link href=${ctx}"/css/modern-business.css" rel="stylesheet">
 	<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -25,6 +25,7 @@
 </head>
 	
 <body>	
+	<#include "web/index_nag.ftl">
 	<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
@@ -42,7 +43,7 @@
 			<div class="row">
 				<div class="col-md-7">
 					<a href="profolio-item.html">
-						<img class="img-respnsive img-hover" src="http://placehold.it/700x300" alt="">
+						<img class="img-responsive img-hover" src="http://placehold.it/700x300" alt="">
 					</a>
 				</div>
 				  	<div class="col-md-5">

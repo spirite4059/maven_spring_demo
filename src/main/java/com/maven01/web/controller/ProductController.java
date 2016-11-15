@@ -11,13 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
+@RequestMapping("/web")
 public class ProductController 
 {
 	@RequestMapping("/product_list")
 	public String show()
 	{
 		System.out.println("show");
-		return "/product_list";
+		return "/web/product_list";
 	}
 
 	@RequestMapping("/product_search")   
