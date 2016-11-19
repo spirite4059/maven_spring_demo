@@ -50,13 +50,15 @@
     </bean>-->
     
     <!-- =freemark的解析器= -->
-    <bean id="freemarkerResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+    <bean id="freemarkerResolver" 
+    	class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
         <property name="order" value="1" />
         <property name="suffix" value=".ftl" />
         <property name="contentType" value="text/html;charset=utf-8" />
         <property name="viewClass">
             <value>org.springframework.web.servlet.view.freemarker.FreeMarkerView</value>
         </property>
+        <property name="requestContextAttribute" value="request" /> 
     </bean>
     <!-- ===================================================== -->
     <!-- ViewResolver For FreeMarkerConfigurer -->
@@ -95,6 +97,7 @@
 			<value>4096</value>
 		</property>
 	</bean>
+
 
 </beans>
 

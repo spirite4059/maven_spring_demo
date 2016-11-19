@@ -1,0 +1,142 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>显示课程和内容</title>
+	
+	<link   rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	
+	
+	<!-- 分页 -->
+	<script type="text/javascript" charset="utf-8" src="../js/pagination.js"></script>
+	<script src="../js/jquery.twbsPagination.min.js" type="text/javascript"></script>
+	
+	<script>
+		$(function (){
+			var $pagination = $('#pagination');
+		    var defaultOpts = {
+		        totalPages: 20
+		    };
+		    $pagination.twbsPagination(defaultOpts);
+			//get_data(0);//默认取一页，然后配置数据
+
+		    
+			function get_data(select_page)
+			{
+				var get_url ="/get_post_list?article_id=1&page_num=0&page_size=3";
+				$.ajax({
+			        url:get_url,
+			        type:"get",
+			        async:true,
+			        success:function(data)
+			        {
+			            alert(data);
+			            //ajax返回的数据
+			            if(data.backstate=="1")
+			            {
+			                //弹出对话框，提交成功
+			                swal("信息提交成功！");
+
+			                var res_comms=data.res;
+			                var divHtml="";
+			                var len=res_comms.length;
+			                for(var i=0;i<len;i++)
+			                {
+			                    console.log(
+			                        res_comms[i].comment
+			                    );
+			                };
+
+			                //评论的相关信息
+			                //$("#comments").append(divHtml);
+			            }
+			        },
+			        error: function(request) {
+			            swal({
+			                title: "连接失败",
+			                text: "连接失败，1秒后关闭",
+			                timer: 1000,
+			                showConfirmButton: false
+			            });
+			        }
+			    });
+			}
+	    });
+	</script>
+</head>
+
+<body>
+	<!-- 网页的主体 -->
+     <div class="container">
+     	<div class="panel panel-default">
+	     	<div class="panel-body">
+	     		<div class="row">
+		    		 <input type="checkbox">123 id:12345
+		    	</div>	<!--row -->
+		    	<div class="row">
+		    		<div class="col-md-12 well">
+		    			修改的内容
+		    		</div>
+		    	</div>	<!-- row -->
+		    	<div class="col-md-12">
+		   			<button id=update_bt type="button" class="btn btn-primary btn-sm">修改</button>
+					<button type="button" class="btn btn-primary btn-sm">删除</button>
+					<button type="button" class="btn btn-primary btn-sm">合并</button>
+					<button type="button" class="btn btn-primary btn-sm">插入文字</button>
+					<button type="button" class="btn btn-primary btn-sm">插入图片</button>
+		    	</div>	<!--row -->
+		    </div>
+    	</div><!--panel-->
+    	<div class="panel panel-default">
+	     	<div class="panel-body">
+	     		<div class="row">
+		    		 <input type="checkbox">123 id:12345
+		    	</div>	<!--row -->
+		    	<div class="row">
+		    		<div class="col-md-12 well">
+		    			 <img class="img-responsive img-hover img-rounded"  src="http://placehold.it/700x300" alt="">
+		    		</div>
+		    	</div>	<!-- row -->
+		    	<div class="col-md-12">
+		   			<button id=update_bt type="button" class="btn btn-primary btn-sm">修改</button>
+					<button type="button" class="btn btn-primary btn-sm">删除</button>
+					<button type="button" class="btn btn-primary btn-sm">合并</button>
+					<button type="button" class="btn btn-primary btn-sm">插入文字</button>
+					<button type="button" class="btn btn-primary btn-sm">插入图片</button>
+		    	</div>	<!--row -->
+		    </div>	<!--panel-body  -->
+    	</div><!--panel-->
+		
+		<!--  分页  -->		
+		<div class="text-center">
+			<nav aria-label="Page navigation">
+		        <ul class="pagination" id="pagination"></ul>
+		    </nav>
+		</div>
+		
+    
+   		<!-- Footer -->
+       <footer>
+           <div class="row">
+               <div class="col-lg-12" style="height:100px">
+                   <p>Copyright &copy; Your Website 2014</p>
+               </div>
+           </div>
+		</footer>
+	</div> <!--container结束 -->
+</body>
+</html>
+
+
+
+

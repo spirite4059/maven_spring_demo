@@ -92,6 +92,8 @@
 
 		</tx:attributes>
 	</tx:advice>
+
+	
 	<!-- Spring aop事务管理 -->
 	<aop:config>
 		<aop:pointcut id="transactionPointcut"
