@@ -95,7 +95,7 @@
 	</tx:advice>
 
 	
-	<!-- Spring aop事务管理 -->
+	<!-- Spring aop事务管理 <aop:aspectj-autoproxy proxy-target-class="true"/> -->
 	<aop:config>
 		<aop:pointcut id="transactionPointcut"
 			expression="execution(* com.maven01.web.service..*Impl.*(..))" />
