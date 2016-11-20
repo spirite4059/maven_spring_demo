@@ -15,14 +15,14 @@
 	    post_id, post_num,post_type,post_date,post_content
 	</sql>
 	  
-	<select id="getList" resultMap="com.maven01.web.bean.ArticlePost">
+	<select id="getList" resultMap="BaseResultMap">
   		select 
 		 <include refid="Base_Column_List" />
 		from article_post
   	</select>
   
   
- 	<select id="getListByEntity" resultMap="com.maven01.web.bean.ArticlePost"
+ 	<select id="getListByEntity" resultMap="BaseResultMap"
   		  parameterType="com.maven01.web.bean.ArticlePost">
   		select * from article_post 
   		<where>
