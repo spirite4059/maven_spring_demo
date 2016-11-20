@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maven01.web.dao.ArticlePostDao" >
+
+	<resultMap id="BaseResultMap" type="com.maven01.web.bean.ArticlePost" >
+	    <result column="post_id" property="postId" jdbcType="INTEGER" />
+	    <result column="post_num" property="postNum" jdbcType="INTEGER" />
+	    <result column="post_type" property="postType" jdbcType="INTEGER" />
+	    <result column="post_date" property="postDate" jdbcType="TIMESTAMP" />
+	</resultMap>
+	  
+	<resultMap id="ResultMapWithBLOBs" type="com.maven01.web.bean.ArticlePost" extends="BaseResultMap" >
+	    <result column="post_content" property="postContent" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	  
+	<sql id="Blob_Column_List" >
+	   	 post_content
+	</sql>
+	  
+	<select id="getList" resultMap="com.maven01.web.bean.ArticlePost">
+  		select * from article_post
+  	</select>
+  
+  
+ 	<select id="getListByEntity" resultMap="com.maven01.web.bean.ArticlePost"
+  		  parameterType="com.maven01.web.bean.ArticlePost">
+  		select * from article_post 
+  		<where>
+	  		1=1
+	  		<if test=" postId!= null and postId!='' ">
+	  		and post_id = #{postId}
+	  		</if>
+  		</where>
+  	</select>
+  
+  
+  	<insert id="save" parameterType="com.maven01.web.bean.ArticlePost" >
+    	insert into article_post (post_id, post_num, post_type, 
+      	post_date, post_content)
+    	values 
+    	(	#{postId,jdbcType=INTEGER}, 
+    		#{postNum,jdbcType=INTEGER}, 
+    		#{postType,jdbcType=INTEGER}, 
+      		#{postDate,jdbcType=TIMESTAMP}, 
+      		#{postContent,jdbcType=LONGVARCHAR})
+  	</insert>
+  	
+  		
+	<insert id="saveAll" parameterType="java.util.List">
+	   insert into article_post(post_id, post_num, post_type, 
+      	post_date, post_content) 
+      	values 
+	    <foreach collection="list" item="item" index="index" separator="," >
+	        (
+	            #{item.postId},
+	            #{item.postNum},
+	            #{item.PostType},
+	            #{item.PostDate},
+	            #{item.PostContent}
+	        )
+	    </foreach>
+	</insert>
+  
+  
+  	<update id="update" parameterType="com.maven01.web.bean.ArticlePost">
+		update article_post
+		<set>
+			<if test="postNum != null">
+				post_num=#{postNum},
+			</if>
+			<if test="postType != null">
+				post_type=#{postType},
+			</if>
+			<if test="post_content!=null and post_content!='' ">
+				post_content=#{postContent},
+			</if>
+			<if test="post_date !=null">
+				post_date =# {postDate}
+			</if>
+		</set>
+		where post_id = #{postId}
+	</update>
+	
+	
+  
+	<delete id="deleteById" parameterType="INTEGER">
+	  	delete from article_post where post_id = #{postId}
+	</delete>
+  
+  	
+  
+</mapper>
+
+
+
+

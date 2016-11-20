@@ -98,8 +98,6 @@
 		</property>
 	</bean>
 
-	<!-- 尝试-->
-	<bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
 
 </beans>
 

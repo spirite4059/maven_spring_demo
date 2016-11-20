@@ -2,21 +2,16 @@ package com.maven01.web.bean;
 
 import java.util.Date;
 
-public class UpImage {
+public class UpImage 
+{
     private Integer imgId;
-
     private String imgName;
-
     private String imgDesp;
-
     private Integer imgType;
-
     private String imgUrl;
-
     private String imgThumbUrl;
-
     private Date imgDate; 
-
+    
     public Integer getImgId() {
         return imgId;
     }

@@ -1,13 +1,15 @@
 package com.maven01.web.service.Impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.maven01.web.bean.ArticlePost;
 import com.maven01.web.dao.ArticlePostDao;
 import com.maven01.web.dao.BaseDao;
 import com.maven01.web.service.ArticlePostService;
 
 
-//
+@Service
 public class ArticlePostServiceImp extends BaseServiceImp<ArticlePost> implements ArticlePostService
 {
 	@Autowired
@@ -18,6 +20,4 @@ public class ArticlePostServiceImp extends BaseServiceImp<ArticlePost> implement
 	{
 		return articlePostDao;
 	}
-	
-	
 }

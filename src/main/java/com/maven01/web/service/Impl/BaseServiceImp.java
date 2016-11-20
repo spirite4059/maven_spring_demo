@@ -16,7 +16,7 @@ public abstract class BaseServiceImp <T> extends BaseServlet implements BaseServ
 	//抽象方法，返回具体的Dao，有了具体类型
 	protected abstract BaseDao<T> getDao();
 	
-	protected Logger logger = LoggerFactory.getLogger(this.getClass());
+	//protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	//根据id，返回对象
 	public T getEntityById(int id)throws Exception

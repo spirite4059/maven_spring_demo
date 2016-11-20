@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.maven01.web.dao.ArticleMapper" >
+<mapper namespace="com.maven01.web.dao.ArticleDao" >
   <resultMap id="BaseResultMap" type="com.maven01.web.bean.Article" >
     <id column="article_id" property="articleId" jdbcType="INTEGER" />
     <result column="article_name" property="articleName" jdbcType="VARCHAR" />
