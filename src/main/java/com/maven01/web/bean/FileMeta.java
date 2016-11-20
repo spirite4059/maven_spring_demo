@@ -1,6 +1,7 @@
 package com.maven01.web.bean;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 //ignore "bytes" when return json format
 @JsonIgnoreProperties({"bytes"}) 

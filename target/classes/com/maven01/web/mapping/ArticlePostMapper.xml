@@ -10,7 +10,7 @@
 	    <result column="post_content" property="postContent" jdbcType="LONGVARCHAR" />
 	</resultMap>
 	  
-	  
+	
 	<sql id="Base_Column_List" >
 	    post_id, post_num,post_type,post_date,post_content
 	</sql>
@@ -22,14 +22,28 @@
   	</select>
   
   
- 	<select id="getListByEntity" resultMap="BaseResultMap"
-  		  parameterType="com.maven01.web.bean.ArticlePost">
-  		select * from article_post 
+ 	<select id="getListByEntity" resultMap="BaseResultMap" parameterType="com.maven01.web.bean.ArticlePost">
+  		select 
+  		<include refid="Base_Column_List" />
+  			from article_post 
   		<where>
 	  		1=1
-	  		<if test=" postId!= null and postId!='' ">
-	  		and post_id = #{postId}
+	  		<if test=" postId != 0 ">
+	  			and post_id = #{postId}
 	  		</if>
+	  		
+	  		<if test=" postNum != 0 ">
+	  			and post_num = #{postNum}
+	  		</if>
+	  		
+	  		<if test=" postType != 0 ">
+	  			and post_type = #{postType}
+	  		</if>
+	  		
+	  		<if test=" postContent != null and postContent != '' ">
+	  			and post_content = #{postContent}
+	  		</if>
+	  		
   		</where>
   	</select>
   
@@ -65,18 +79,16 @@
   	<update id="update" parameterType="com.maven01.web.bean.ArticlePost">
 		update article_post
 		<set>
-			<if test="postNum != null">
+			<if test="postNum != 0">
 				post_num=#{postNum},
 			</if>
-			<if test="postType != null">
+			<if test="postType != 0">
 				post_type=#{postType},
 			</if>
 			<if test="post_content!=null and post_content!='' ">
 				post_content=#{postContent},
 			</if>
-			<if test="post_date !=null">
-				post_date =# {postDate}
-			</if>
+			
 		</set>
 		where post_id = #{postId}
 	</update>
