@@ -47,12 +47,12 @@
   		</where>
   	</select>
   
-  
+  	<!-- 插入数据的时候不需要id的数值 -->
   	<insert id="save" parameterType="com.maven01.web.bean.ArticlePost" >
-    	insert into article_post (post_id, post_num, post_type, 
+    	insert into article_post ( post_num, post_type, 
       	post_date, post_content)
     	values 
-    	(	#{postId,jdbcType=INTEGER}, 
+    	(	
     		#{postNum,jdbcType=INTEGER}, 
     		#{postType,jdbcType=INTEGER}, 
       		#{postDate,jdbcType=TIMESTAMP}, 

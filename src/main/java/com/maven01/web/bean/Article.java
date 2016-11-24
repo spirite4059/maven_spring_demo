@@ -1,11 +1,10 @@
 package com.maven01.web.bean;
 
-public class Article {
+public class Article 
+{
     private Integer articleId;
-
-    private String articleName;
-
-    private String articleList;
+    private String articleName;	//ariticle
+    private String articleList;	//ariticle 相应的post的列表
 
     public Integer getArticleId() {
         return articleId;

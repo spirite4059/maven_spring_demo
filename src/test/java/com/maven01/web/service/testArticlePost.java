@@ -2,6 +2,7 @@ package com.maven01.web.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.maven01.web.bean.Article;
 import com.maven01.web.bean.ArticlePost;
 import com.maven01.web.bean.UpImage;
 import com.maven01.web.bean.User;
@@ -29,31 +30,45 @@ public class testArticlePost {
 	
 	
 	@Test
-	public void testGetList() 
+	public void getList() 
 	{
-//       // String web_path = request.getSession().getServletContext().getRealPath(""); 	//获得项目的绝对路径
-//		List<ArticlePost> posts=new ArrayList<ArticlePost>();
-//		try {
-//			posts=service.getList();
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		logger.info("选择出来的是什么啊："+posts);
-	}
-
-	
-	@Test
-	public void  insert() throws Exception
-	{
-		ArticlePost a=new ArticlePost();
-		a.setPostNum(3);
-		a.setPostType(0);
-		a.setPostContent("adsfasdf");
-		
-		service.save(a);
+       // String web_path = request.getSession().getServletContext().getRealPath(""); 	//获得项目的绝对路径
+		List<ArticlePost> posts=new ArrayList<ArticlePost>();
+		try {
+			posts=service.getList();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		logger.info("选择出来的是什么啊："+posts);
 	}
 	
+//	@Test
+//	public void getListByEntity() 
+//	{
+////       // String web_path = request.getSession().getServletContext().getRealPath(""); 	//获得项目的绝对路径
+////		List<ArticlePost> posts=new ArrayList<ArticlePost>();
+////		try {
+////			posts=service.getList();
+////		} catch (Exception e) {
+////			// TODO Auto-generated catch block
+////			e.printStackTrace();
+////		}
+////		logger.info("选择出来的是什么啊："+posts);
+//	}
+//
+//	
+//	@Test
+//	public void  insert() throws Exception
+//	{
+//		ArticlePost a=new ArticlePost();
+//		a.setPostNum(3);
+//		a.setPostType(0);
+//		a.setPostContent("adsfasdf");
+//		
+//		service.save(a);
+//	}
+//	
 //	
 //	@Test
 //	public void  update() throws Exception

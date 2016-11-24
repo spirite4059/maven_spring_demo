@@ -10,7 +10,7 @@
     <meta name="description" content="">
 	<meta name="author" content="">
 
-	<title>显示课程和内容</title>
+	<title>显示课程和内容</title>  
 	
 	<link   rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -18,115 +18,196 @@
 	
 	
 	<!-- 分页 -->
-	<script type="text/javascript" charset="utf-8" src="../js/pagination.js"></script>
-	<script src="../js/jquery.twbsPagination.min.js" type="text/javascript"></script>
+	<script src="../js/pagination/jquery.bootpag.js" type="text/javascript"></script>
+	
+	<!-- 对应的js文件
+	<script src="../js/post_use.js" type="text/javascript"></script>   -->
 	
 	<script>
-		$(function (){
-			var $pagination = $('#pagination');
-		    var defaultOpts = {
-		        totalPages: 20
-		    };
-		    $pagination.twbsPagination(defaultOpts);
-			//get_data(0);//默认取一页，然后配置数据
+		$(function(){
+			
+			//console.log($('button.edit_class'));
+			//每一个按钮点击的时候都这么找到id
+			
+			$('button.edit_class').click(function()
+			{	
+				//当前单元格的属性,id和类型
+				var my_id = $(this).parent().children('input').eq(0).prop('value');
+				var my_type = $(this).parent().children('input').eq(1).prop('value');
+				
+				//获取了内容部分的div
+				var textArea = $(this).parent().parent(".panel-body").find('textarea');
 
-		    
-			function get_data(select_page)
-			{
-				var get_url ="/get_post_list?article_id=1&page_num=0&page_size=3";
+				
+				//点击编辑修改只读属性
+				if(textArea.prop('readonly'))
+				{
+					textArea.prop('readonly',false);
+				}else
+					textArea.prop('readonly',true);
+				
+				console.log(my_id);
+				
+			});
+			
+			//点击保存按钮的时候
+			$('button.save_class').click(function()
+			{	
+				//当前单元格的属性
+				var my_inputs = $(this).parent().children('input');
+				var my_id=my_inputs.eq(0).prop('value');
+				var my_type = my_inputs.eq(1).prop('value');
+				//获取了内容部分的div
+				var textArea = $(this).parent().parent(".panel-body").find('textarea');
+				
+				//提交代码
 				$.ajax({
-			        url:get_url,
-			        type:"get",
-			        async:true,
-			        success:function(data)
-			        {
-			            alert(data);
-			            //ajax返回的数据
-			            if(data.backstate=="1")
-			            {
-			                //弹出对话框，提交成功
-			                swal("信息提交成功！");
-
-			                var res_comms=data.res;
-			                var divHtml="";
-			                var len=res_comms.length;
-			                for(var i=0;i<len;i++)
-			                {
-			                    console.log(
-			                        res_comms[i].comment
-			                    );
-			                };
-
-			                //评论的相关信息
-			                //$("#comments").append(divHtml);
-			            }
-			        },
-			        error: function(request) {
-			            swal({
-			                title: "连接失败",
-			                text: "连接失败，1秒后关闭",
-			                timer: 1000,
-			                showConfirmButton: false
-			            });
-			        }
-			    });
-			}
-	    });
+					url:"/post/savePost",
+					type:'post',
+					data:"{id:"+my_id+",content:"+textArea.val()+"}",
+					success:function(data) 
+					{
+			    		cosole.log( "Data Loaded: " + data );
+			    		//如果成功的话，提示成功，1秒消失
+					},
+					error:function(data)
+					{
+						console.log(data);
+					}
+				});
+				
+				var content=textArea.val();
+				//点击编辑修改只读属性
+				if(textArea.prop('readonly'))
+				{
+					textArea.prop('readonly',false);
+				}else
+					textArea.prop('readonly',true);
+				console.log(my_id);	
+			});	//保存按钮结束
+			
+			
+			//点击插入按钮
+			//点击保存按钮的时候
+			$('button.insert_class').click(function()
+			{	
+				//当前单元格的属性
+				var my_inputs = $(this).parent().children('input');
+				var my_id=my_inputs.eq(0).prop('value');
+				var my_type = my_inputs.eq(1).prop('value');
+				
+				//提交代码
+				$.ajax({
+					url:"/post/insertPost",	//插入文章碎片
+					type:'post',
+					data:"{id:"+my_id+",content:"+textArea.val()+"}",
+					success:function(data) 
+					{
+			    		cosole.log( "Data Loaded: " + data );
+			    		//如果成功的话，提示成功，1秒消失
+					},
+					error:function(data)
+					{
+						console.log(data);
+					}
+				});
+				
+				var content=textArea.val();
+				//点击编辑修改只读属性
+				if(textArea.prop('readonly'))
+				{
+					textArea.prop('readonly',false);
+				}else
+					textArea.prop('readonly',true);
+				console.log(my_id);	
+			});	//保存按钮结束
+			
+		});
 	</script>
+	
 </head>
 
 <body>
 	<!-- 网页的主体 -->
-     <div class="container">
-     	<div class="panel panel-default">
-	     	<div class="panel-body">
-	     		<div class="row">
-		    		 <input type="checkbox">123 id:12345
-		    	</div>	<!--row -->
-		    	<div class="row">
-		    		<div class="col-md-12 well">
-		    			修改的内容
-		    		</div>
-		    	</div>	<!-- row -->
-		    	<div class="col-md-12">
-		   			<button id=update_bt type="button" class="btn btn-primary btn-sm">修改</button>
-					<button type="button" class="btn btn-primary btn-sm">删除</button>
-					<button type="button" class="btn btn-primary btn-sm">合并</button>
-					<button type="button" class="btn btn-primary btn-sm">插入文字</button>
-					<button type="button" class="btn btn-primary btn-sm">插入图片</button>
-		    	</div>	<!--row -->
-		    </div>
-    	</div><!--panel-->
-    	<div class="panel panel-default">
-	     	<div class="panel-body">
-	     		<div class="row">
-		    		 <input type="checkbox">123 id:12345
-		    	</div>	<!--row -->
-		    	<div class="row">
-		    		<div class="col-md-12 well">
-		    			 <img class="img-responsive img-hover img-rounded"  src="http://placehold.it/700x300" alt="">
-		    		</div>
-		    	</div>	<!-- row -->
-		    	<div class="col-md-12">
-		   			<button id=update_bt type="button" class="btn btn-primary btn-sm">修改</button>
-					<button type="button" class="btn btn-primary btn-sm">删除</button>
-					<button type="button" class="btn btn-primary btn-sm">合并</button>
-					<button type="button" class="btn btn-primary btn-sm">插入文字</button>
-					<button type="button" class="btn btn-primary btn-sm">插入图片</button>
-		    	</div>	<!--row -->
-		    </div>	<!--panel-body  -->
-    	</div><!--panel-->
-		
+     <div class="container" >
+     	<div id="ct">
+			<div class="panel panel-default">	//默认的操作面板
+		     	<div class="panel-body">
+		     		<div class="row">
+			    		 <input type="checkbox">123 id:12345
+			    	</div>	<!--row -->
+	    	 		<div class="col-md-12 content_div">
+					 	<textarea class="form-control" readonly rows="3"  id="post_123"></textarea>
+					</div>
+					<div class="col-md-12">
+			    		<button type="button" class="btn btn-primary btn-sm edit_class" >编辑</button>
+			   			<button type="button" class="btn btn-primary btn-sm save_class">保存</button>
+						<button type="button" class="btn btn-primary btn-sm delete_class" >删除</button>
+						<button type="button" class="btn btn-primary btn-sm merge_up_class">向上合并</button>
+						<button type="button" class="btn btn-primary btn-sm insert_text_class">插入文字</button>
+						<button type="button" class="btn btn-primary btn-sm insert_img_class">插入图片</button>
+						<button type="button" class="btn btn-primary btn-sm move_down_class">移上一位</button>
+						<button type="button" class="btn btn-primary btn-sm move_up_class">移下一位</button>
+						<input  type="hidden" value="12345" >
+						<input  type="hidden" value="0" >
+			    	</div>	<!--row -->
+				</div>
+			</div>
+	     	<div class="panel panel-default">
+		     	<div class="panel-body">
+		     		<div class="row">
+			    		 <input type="checkbox">123 id:12345
+			    	</div>	<!--row -->
+			    	<div class="row content_div">
+			    		<div class="col-md-12 well">
+			    			修改的内容
+			    		</div>
+			    	</div>	<!-- row -->
+			    	<div class="col-md-12">  
+			    		<button type="button" class="btn btn-primary btn-sm edit_class" >编辑</button>
+			   			<button type="button" class="btn btn-primary btn-sm save_class">保存</button>
+						<button type="button" class="btn btn-primary btn-sm delete_class" >删除</button>
+						<button type="button" class="btn btn-primary btn-sm merge_up_class">向上合并</button>
+						<button type="button" class="btn btn-primary btn-sm insert_text_class">插入文字</button>
+						<button type="button" class="btn btn-primary btn-sm insert_img_class">插入图片</button>
+						<button type="button" class="btn btn-primary btn-sm move_down_class">移上一位</button>
+						<button type="button" class="btn btn-primary btn-sm move_up_class">移下一位</button>
+						<input  type="hidden" value="12345" >
+						<input  type="hidden" value="0" >
+			    	</div>		<!--row -->
+			    </div>
+	    	</div><!--panel-->
+	    	<div class="panel panel-default">
+		     	<div class="panel-body">
+		     		<div class="row">
+			    		 <input type="checkbox">123 id:12345
+			    	</div>	<!--row -->
+			    	<div class="row">
+			    		<div class="col-md-12 well">
+			    			 <img class="img-responsive img-hover img-rounded"  src="http://placehold.it/700x300" alt="">
+			    		</div>
+			    	</div>	<!-- row -->
+			    	<div class="col-md-12">
+			   			<button type="button" id=update_bt  class="btn btn-primary btn-sm">修改</button>
+						<button type="button" class="btn btn-primary btn-sm">删除</button>
+						<button type="button" class="btn btn-primary btn-sm">合并</button>
+						<button type="button" class="btn btn-primary btn-sm">插入文字</button>
+						<button type="button" class="btn btn-primary btn-sm">插入图片</button>
+			    	</div>	<!--row -->
+			    </div>	<!--panel-body  -->
+	    	</div><!--panel-->
+	    	
+	    </div>	<!-- ct的数据 -->
+			
 		<!--  分页  -->		
 		<div class="text-center">
 			<nav aria-label="Page navigation">
 		        <ul class="pagination" id="pagination"></ul>
 		    </nav>
 		</div>
-		
     
    		<!-- Footer -->
-       <footer>
+        <footer>
            <div class="row">
                <div class="col-lg-12" style="height:100px">
                    <p>Copyright &copy; Your Website 2014</p>

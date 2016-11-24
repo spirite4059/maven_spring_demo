@@ -1,8 +1,7 @@
 package com.maven01.web.service;
-import java.util.List;
+
 
 import com.maven01.web.bean.UpImage;
-import com.maven01.web.bean.User;
 import com.maven01.web.util.util;
 
 import org.apache.log4j.Logger; 
@@ -11,7 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import com.alibaba.fastjson.JSON;
+
 
 
 @RunWith(SpringJUnit4ClassRunner.class)

@@ -2,15 +2,12 @@ package com.maven01.web.bean;
 
 import java.util.Date;
 
-public class ArticlePost {
+public class ArticlePost 
+{
     private Integer postId;
-
     private Integer postNum;
-
     private Integer postType;
-
     private Date postDate;
-
     private String postContent;
 
     public Integer getPostId() {
