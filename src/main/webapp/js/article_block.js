@@ -379,7 +379,6 @@ $(function(){
 		});//ajax end
 	});	//insert_bt end
 	
-	
 });
 
 

@@ -17,7 +17,7 @@
 	<select id="getList" resultMap="articleResult">
   		select 
 		 <include refid="Base_Column_List" />
-		from article
+		from article 
 	</select>
 	  
   

@@ -25,7 +25,7 @@ import com.alibaba.fastjson.JSON;
 @ContextConfiguration(locations = { "classpath:test-spring.xml","classpath:spring-mybatis.xml" })
 
 //用来测试artilce的增删改查
-public class test_article {
+public class test {
 	
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	
@@ -51,7 +51,7 @@ public class test_article {
 //
 //	}
 	
-	//@Test
+	@Test
 	public void getList()  throws Exception
 	{
         List<Article> list=new ArrayList<Article>();
