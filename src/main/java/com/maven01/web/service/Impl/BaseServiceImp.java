@@ -47,15 +47,15 @@ public abstract class BaseServiceImp <T> extends BaseServlet implements BaseServ
 
 	
 	//保存某个实体类
-	public void save(T entity)throws Exception
+	public void insert(T entity)throws Exception
 	{
-		getDao().save(entity);
+		getDao().insert(entity);
 	}
 	
 	//保存一个集合 ？？居然没有返回数值
-	public void saveAll(Collection<T> entities)throws Exception
+	public void insertAll(Collection<T> entities)throws Exception
 	{
-		getDao().saveAll(entities);
+		getDao().insertAll(entities);
 	}
 	
 	//更新一个对象

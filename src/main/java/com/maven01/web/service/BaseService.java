@@ -25,11 +25,11 @@ public  interface  BaseService<T>
 
 	
 	//保存某个实体类
-	public void save(T entity)throws Exception;
+	public void insert(T entity)throws Exception;
 	
 	
 	//保存一个集合 ？？居然没有返回数值
-	public void saveAll(Collection<T> entities)throws Exception;
+	public void insertAll(Collection<T> entities)throws Exception;
 	
 	//更新一个对象
 	public void update(T entity) throws Exception;

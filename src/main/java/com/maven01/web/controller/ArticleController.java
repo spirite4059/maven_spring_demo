@@ -28,7 +28,7 @@ public class ArticleController extends BaseController
 	private ArticleService articleService;
 	
 	@RequestMapping("/queryList")
-	@ResponseBody	//page代表当前是第几页，rows代表每个页面显示多少数据
+	@ResponseBody				//page代表当前是第几页，rows代表每个页面显示多少数据
 	public PageInfo queryList(Integer page,Integer rows)
 	{
 		//获得固定的数据
@@ -45,12 +45,11 @@ public class ArticleController extends BaseController
 		{
 			logger.info(e.toString());
 		}
-		
 		return pageInfo;  //返回的是对象列表 
 	}
 	
 	
-	@RequestMapping ("/save")
+	@RequestMapping ("/insert")
 	@ResponseBody
 	public Map<String,Object> save(Article article)
 	{
@@ -58,7 +57,7 @@ public class ArticleController extends BaseController
 		
 		try
 		{
-			articleService.save(article);
+			articleService.insert(article);
 		}catch(Exception e)
 		{
 			result=this.error(e.getMessage());//把错误信息输出去

@@ -51,7 +51,7 @@ public class test_article {
 //
 //	}
 	
-	//@Test
+	@Test
 	public void getList()  throws Exception
 	{
         List<Article> list=new ArrayList<Article>();

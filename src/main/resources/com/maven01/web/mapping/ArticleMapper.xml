@@ -19,6 +19,17 @@
 		 <include refid="Base_Column_List" />
 		from article 
 	</select>
+	
+	
+	<!-- 通过id选择出一个实体类来 -->
+	<select id="getEntityById" resultMap="articleResult" parameterType="INTEGER">
+ 		select 
+	 	<include refid="Base_Column_List" />  
+			from article 
+		<where>
+			article_id = #{articleId}  
+		</where>
+	</select>	
 	  
   
  	<select id="getListByEntity" resultMap="articleResult" parameterType="com.maven01.web.bean.Article">
@@ -38,7 +49,7 @@
   	</select>
   
   
-  	<insert id="save" parameterType="com.maven01.web.bean.Article" >
+  	<insert id="insert" parameterType="com.maven01.web.bean.Article" >
     	insert into article ( article_name, article_list)
     	values 
     	(	
@@ -47,7 +58,7 @@
   	</insert>
   	
   		
-	<insert id="saveAll" parameterType="java.util.List">
+	<insert id="insertAll" parameterType="java.util.List">
 	   insert into article(article_id, article_name, article_list) 
       	values 
 	    <foreach collection="list" item="item" index="index" separator="," >
@@ -83,7 +94,7 @@
 		where article_id = #{articleId}
 	</update>
 	
-	  
+	
 	<delete id="deleteById" parameterType="INTEGER">
 	  	delete from article where article_id = #{articleId}
 	</delete>
@@ -94,6 +105,8 @@
 	</delete>
   	
 </mapper>
+
+
 
 
 
