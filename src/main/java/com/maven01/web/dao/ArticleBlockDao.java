@@ -13,4 +13,7 @@ public interface ArticleBlockDao extends BaseDao<ArticleBlock>
 	//保存某个文章的一个块
 	public int insertAndGetId(ArticleBlock articleBlock) throws Exception;
 	
+	//根据输入的block list选择出数据
+	public List<ArticleBlock> selectBlockByList(List blockList) throws Exception; 
+	
 }

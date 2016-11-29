@@ -36,7 +36,24 @@
 	 	</if>	
 		</where>
 	</select>
-	  
+	
+	
+	<!-- List<ArticleBlock> selectBlockByList(List blockList)  -->
+	<select id = "selectBlockByList" resultMap="articleBlock" parameterType="java.util.List">
+	   select * 
+	   from article_block 
+	   where block_id in 
+	   <foreach item="item" index="index" collection="list"
+	             open="(" separator="," close=")">
+	        #{item}
+	   </foreach>
+	   order by field(block_id,
+	   <foreach item="item" index="index" collection="list"
+	              separator="," close=")">
+	        #{item}
+	   </foreach>
+	</select>
+	
   
   	<insert id="insert" parameterType="com.maven01.web.bean.ArticleBlock" >
     	insert into article_block ( article_id, block_type ,block_content , date)
