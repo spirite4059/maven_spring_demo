@@ -30,6 +30,7 @@ public class test_block
 	@Autowired
 	private ArticleDao articleDao;					//文章的数据操作类
 	
+	
 //	@Test
 //	public void insertBlock() throws Exception
 //	{	
@@ -116,26 +117,126 @@ public class test_block
 //		//更新文章的内容
 //		articleDao.update(article1);
 //		
-//	}//插入文章块
+//	}	//插入文章块  
 	
 	
 	
 	//处理分页的事情而已
+//	@Test
+//	public void list_all() throws Exception
+//	{
+//		//自己解决分页的问题
+//		// page 和 rows,一个是当前的页数，一个是每个页面有多少个
+//		
+//		//做两步操作，一步选择出article相应的list,解析,然后做处理;然后算计当前的
+//		
+//		int page=1;
+//		int rows=10;
+//		int article_id=48;
+//		
+//		Article article= articleDao.getEntityById(article_id);
+//		if(article == null) 
+//			throw new Exception("没选择有效的文章");
+//		
+//		 
+//		//获取article list用#区分,第一个#去掉 
+//		String blockListStr = article.getArticleList();
+//		List<Integer> blockLink = new LinkedList<Integer>();		
+//		
+//		
+//		//字符串是空的,
+//		if(blockListStr!=null && !blockListStr.equals(""))
+//		{
+//			//用#!来切分字符串
+//			String[] tmp_array=blockListStr.split("#");
+//			for(int i=0;i<tmp_array.length;i++)	
+//			{
+//				if(!tmp_array[i].equals(""))
+//				{
+//					blockLink.add( Integer.valueOf(tmp_array[i]));
+//				}
+//			}
+//			if(blockLink.size()<=0) return;//throw new Exception("没内容");
+//			
+//			//根据mybatis的pageInfor来定义来定义的基础类
+//			int total = blockLink.size();
+//			int left =	total%page;
+//			int pages  =	(int) Math.floor(total/page);
+//			
+//			if(left!=0)pages++;	//如果分页正好
+//			
+//			if(page<=0)
+//				page=1;
+//			else if(page>pages)
+//				page=pages;
+//			
+//			int pageSize=rows;
+//			int pageNum=page;
+//			
+//			//算一下本页文件的范围
+//			int startRow;
+//			int endRow;
+//			
+//			startRow=(pageNum-1)*pageSize+1;
+//			endRow=startRow+pageSize-1; 	//1+10-1=10，范围是1-10
+//			
+//			if(endRow>total)endRow=total;	//例子：1-10是第一个页面，9
+//			
+//			int size=endRow-startRow+1;		//总共的数量
+//			int firstPage = 1 ;
+//			int lastPage  = pages;
+//			
+//			int prePage	 =  pageNum-1;
+//			int nextPage =  pageNum+1;
+//			if(nextPage>lastPage)nextPage=lastPage;
+//			
+//			boolean isFirstPage	=false;
+//			boolean isLastPage	=false;
+//			if(page==firstPage) isFirstPage	=true;
+//			if(page==lastPage)  isLastPage	=true;
+//			
+//			//暂时不知道干嘛用
+//			int navigatePages=8;		//导航页码数
+//			int naviagetPageNums=1;		//所有导航页号
+//			
+//			//把所有相关的页面选择出来
+//			List <ArticleBlock> data = articleBlockDao.selectBlockByList(blockLink);   
+//			
+////			for(ArticleBlock element : data)
+////			{
+////				logger.info(element.getBlockId().toString());
+////			}
+//			
+//			//将数值设置到里面并返回
+//			PageInfoM<ArticleBlock> pageInfoM =new PageInfoM<ArticleBlock>();
+//			pageInfoM.setPageNum(pageNum);
+//			pageInfoM.setPageSize(pageSize);
+//			pageInfoM.setSize(size);
+//			pageInfoM.setStartRow(startRow);
+//			pageInfoM.setEndRow(endRow);
+//			pageInfoM.setTotal(total);
+//			pageInfoM.setPages(pages);
+//			pageInfoM.setFirstPage(firstPage);
+//			pageInfoM.setLastPage(lastPage);
+//			pageInfoM.setPrePage(prePage);
+//			pageInfoM.setNextPage(nextPage);
+//			pageInfoM.setIsFirstPage(isFirstPage);
+//			pageInfoM.setIsLastPage(isLastPage);
+//			pageInfoM.setList(data);
+//			
+//		}
+//	}
+
+
+	//删除某一个block块
 	@Test
-	public void list_all() throws Exception
+	public void deleteBlock() throws Exception
 	{
-		//自己解决分页的问题
-		// page 和 rows,一个是当前的页数，一个是每个页面有多少个
-		
-		//做两步操作，一步选择出article相应的list,解析,然后做处理;然后算计当前的
-		
-		int page=1;
-		int rows=10;
+		int block_id=11;	//要删除的block块
 		int article_id=48;
 		
 		Article article= articleDao.getEntityById(article_id);
-		if(article == null) 
-			throw new Exception("没选择有效的文章");
+		if(article == null) throw new Exception("没选择有效的文章");
 		
 		 
 		//获取article list用#区分,第一个#去掉 
@@ -155,74 +256,40 @@ public class test_block
 					blockLink.add( Integer.valueOf(tmp_array[i]));
 				}
 			}
-			if(blockLink.size()<=0) return;//throw new Exception("没内容");
 			
-			//根据mybatis的pageInfor来定义来定义的基础类
-			int total = blockLink.size();
-			int left =	total%page;
-			int pages  =	(int) Math.floor(total/page);
+			if(blockLink.size()<=0) throw new Exception("文章没有有效文章块");
 			
-			if(left!=0)pages++;	//如果分页正好
+			boolean is_find=false;
+			for(Integer elem:blockLink)
+			{
+				//这块是可以直接删除的
+				if(elem==block_id) 
+				{
+					blockLink.remove(elem);
+					is_find=true;
+					break;
+				}
+			} 
 			
-			if(page<=0)
-				page=1;
-			else if(page>pages)
-				page=pages;
-			
-			int pageSize=rows;
-			int pageNum=page;
-			
-			//算一下本页文件的范围
-			int startRow;
-			int endRow;
-			
-			startRow=(pageNum-1)*pageSize+1;
-			endRow=startRow+pageSize-1; 	//1+10-1=10，范围是1-10
-			
-			if(endRow>total)endRow=total;	//例子：1-10是第一个页面，9
-			
-			int size=endRow-startRow+1;		//总共的数量
-			int firstPage = 1 ;
-			int lastPage  = pages;
-			
-			int prePage	 =  pageNum-1;
-			int nextPage =  pageNum+1;
-			if(nextPage>lastPage)nextPage=lastPage;
-			
-			boolean isFirstPage	=false;
-			boolean isLastPage	=false;
-			if(page==firstPage) isFirstPage	=true;
-			if(page==lastPage)  isLastPage	=true;
-			
-			//暂时不知道干嘛用
-			int navigatePages=8;		//导航页码数
-			int naviagetPageNums=1;		//所有导航页号
-			
-			//把所有相关的页面选择出来
-			List <ArticleBlock> data = articleBlockDao.selectBlockByList(blockLink);   
-			
-//			for(ArticleBlock element : data)
-//			{
-//				logger.info(element.getBlockId().toString());
-//			}
-			
-			//将数值设置到里面并返回
-			PageInfoM<ArticleBlock> pageInfoM =new PageInfoM<ArticleBlock>();
-			pageInfoM.setPageNum(pageNum);
-			pageInfoM.setPageSize(pageSize);
-			pageInfoM.setSize(size);
-			pageInfoM.setStartRow(startRow);
-			pageInfoM.setEndRow(endRow);
-			pageInfoM.setTotal(total);
-			pageInfoM.setPages(pages);
-			pageInfoM.setFirstPage(firstPage);
-			pageInfoM.setLastPage(lastPage);
-			pageInfoM.setPrePage(prePage);
-			pageInfoM.setNextPage(nextPage);
-			pageInfoM.setIsFirstPage(isFirstPage);
-			pageInfoM.setIsLastPage(isLastPage);
-			pageInfoM.setList(data);
-			
+			if(is_find)	 //如果找到了的话 
+			{
+				//数值转成字符串，然后输出
+				blockListStr="";
+				for(Integer elem:blockLink)	
+				{
+					blockListStr+="#"+elem;			//把一块一块拼成一个整体
+				}
+				
+				//更新到数据库里面去
+				//是之前已经选择出的数据
+				article.setArticleList(blockListStr);
+				articleDao.update(article);
+				
+				
+				//删除文章块
+				articleBlockDao.deleteById(block_id);	
+				
+			}else throw new Exception("没有可删除的文章块");	
 		}
 	}
 }
