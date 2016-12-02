@@ -1,0 +1,105 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>显示文章的内容</title>  
+	
+	<link   rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	
+	<link   rel="stylesheet" href="../css/textareaAutoSize.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/autosize.js/3.0.19/autosize.min.js"></script>
+	
+	<link   rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.js"></script>
+	
+	<!-- 分页 -->
+	<script src="../js/pagination/jquery.bootpag.js" type="text/javascript"></script>
+	
+	<!-- 对应的js文件 -->
+	<script src="../js/article.js" type="text/javascript"></script>  
+	
+
+	</script>
+</head>
+
+
+<body>
+	<!-- 网页的主体 -->
+	<div class="container" >
+		<nav class="navbar navbar-default" role="navigation">
+			<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">文章页</a>
+			</div>
+			<div>
+				<ul class="nav navbar-nav ">
+					<li id="add_bt" class="active"><a href="#">文章编辑</a></li>
+				</ul>
+			</div>
+			</div>
+		</nav>
+	
+     	<div class="row">
+     		<div class="col-md-12">
+    		 	<button type="button" id=insert_bt  class="btn btn-primary btn-sm">添加新文章</button>
+    		 	<button type="button" id=fresh_bt   class="btn btn-primary btn-sm">涮新当前页</button>
+    		</div>
+    	</div>	<!--row -->
+
+     	<div id="ct">
+			<div class="panel panel-default">
+		     	<div class="panel-body">
+		     		<div class="row">
+			    		 <input type="checkbox">123 id:12345
+			    	</div>	<!--row -->
+	    	 		<div class="col-md-12 content_div">
+					 	<textarea class="form-control" readonly rows="3"  id="post_123"></textarea>
+					</div>
+					<div class="col-md-12">
+			    		<button type="button" class="btn btn-primary btn-sm edit_class" >编辑</button>
+			   			<button type="button" class="btn btn-primary btn-sm update_class">保存</button>
+						<button type="button" class="btn btn-primary btn-sm delete_class" >删除</button>
+						<button type="button" class="btn btn-primary btn-sm merge_up_class">向上合并</button>
+						<button type="button" class="btn btn-primary btn-sm insert_text_class">插入文字</button>
+						<button type="button" class="btn btn-primary btn-sm insert_img_class">插入图片</button>
+						<button type="button" class="btn btn-primary btn-sm move_down_class">移上一位</button>
+						<button type="button" class="btn btn-primary btn-sm move_up_class">移下一位</button>
+						<input  type="hidden" value="12345" >
+						<input  type="hidden" value="0" >
+			    	</div>	<!--row -->
+				</div>
+			</div>
+	    </div>	<!-- ct的数据 -->
+			
+		<!--  分页  -->		
+		<div class="text-center">
+			<nav aria-label="Page navigation">
+		        <ul class="pagination" id="pagination"></ul>
+		    </nav>
+		</div>
+    
+   		<!-- Footer -->
+        <footer>
+           <div class="row">
+               <div class="col-lg-12" style="height:100px">
+                   <p>Copyright &copy; Your Website 2014</p>
+               </div>
+           </div>
+		</footer>
+	</div> <!--container结束 -->
+</body>
+</html>
+
+
+
+

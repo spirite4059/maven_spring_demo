@@ -232,7 +232,7 @@ public class test_block
 	@Test
 	public void deleteBlock() throws Exception
 	{
-		int block_id=11;	//要删除的block块
+		int block_id=13;	//要删除的block块
 		int article_id=48;
 		
 		Article article= articleDao.getEntityById(article_id);

@@ -96,14 +96,14 @@
  	<update id="update" parameterType="com.maven01.web.bean.ArticleBlock">
 		update article_block
 		<set>
-			<if test="article_id != -1 ">
-				article_id =# {articleId},
+			<if test="articleId != -1 ">
+				article_id =#{articleId},
 			</if>
-			<if test="block_content != '' and block_content != null ">
-				block_content =#{block_content},
+			<if test="blockContent != '' and blockContent != null ">
+				block_content =#{blockContent},
 			</if>
-			<if test="block_type != 0 ">
-				block_type=#{block_type}
+			<if test="blockType != 0 ">
+				block_type=#{blockType}
 			</if>
 		</set>
 		where block_id = #{blockId}

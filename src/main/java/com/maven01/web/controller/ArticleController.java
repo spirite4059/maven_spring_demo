@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,6 +27,17 @@ public class ArticleController extends BaseController
 	
 	@Autowired
 	private ArticleService articleService;
+	
+    @RequestMapping("/Article")   
+    public String article(ModelMap modelMap,Integer articleId)
+    {
+    	
+    	System.out.println("请求 article");
+        return "/web/Article";
+    }    
+
+	
+	//***********增删改查
 	
 	@RequestMapping("/queryList")
 	@ResponseBody				//page代表当前是第几页，rows代表每个页面显示多少数据

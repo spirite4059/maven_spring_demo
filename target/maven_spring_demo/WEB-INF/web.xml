@@ -9,6 +9,19 @@
             <param-value>classpath:spring-mybatis.xml</param-value>
     </context-param>
     
+    <!-- 没搞懂,提示缺少信息，设置一个默认的 -->
+    <context-param> 
+	    <param-name>spring.profiles.active</param-name> 
+	    <param-value>dev</param-value> 
+	</context-param> 
+	<context-param> 
+	    <param-name>spring.profiles.default</param-name> 
+	    <param-value>dev</param-value> 
+	</context-param><context-param> 
+	    <param-name>spring.liveBeansView.mbeanDomain</param-name> 
+	    <param-value>dev</param-value> 
+	</context-param> 
+    
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>

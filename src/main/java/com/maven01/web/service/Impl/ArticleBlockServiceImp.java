@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.maven01.web.bean.Article;
 import com.maven01.web.bean.ArticleBlock;
@@ -62,8 +63,8 @@ public class ArticleBlockServiceImp extends BaseServiceImp <ArticleBlock> implem
 			
 			//根据mybatis的pageInfor来定义来定义的基础类
 			int total = blockLink.size();
-			int left =	total%page;
-			int pages  =	(int) Math.floor(total/page);
+			int left =	total%rows;
+			int pages  =	(int) Math.floor(total/rows);
 			
 			if(left!=0)pages++;	//如果分页正好
 			
@@ -132,8 +133,10 @@ public class ArticleBlockServiceImp extends BaseServiceImp <ArticleBlock> implem
 	
 	
 	//插入列表
+	@Transactional(readOnly = false, rollbackFor = Exception.class)
 	public void insertBlock(int inputIndex,ArticleBlock block1) throws Exception
 	{	
+		
 //		ArticleBlock block1=new ArticleBlock();
 //		block1.setBlockContent("");
 //		block1.setArticleId(48);
@@ -141,7 +144,7 @@ public class ArticleBlockServiceImp extends BaseServiceImp <ArticleBlock> implem
 		//int inputIndex = 10;	//block的位置，第一次就插入-1
 		
 		
-		int articleId  = block1.getArticleId();
+		int articleId  = block1.getArticleId();   
 		Article article1=new Article();
 		article1.setArticleId(48);
 		

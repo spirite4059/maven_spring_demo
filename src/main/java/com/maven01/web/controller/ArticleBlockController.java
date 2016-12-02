@@ -7,13 +7,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.maven01.web.bean.Article;
 import com.maven01.web.bean.ArticleBlock;
+import com.maven01.web.bean.ArticleBlockP;
 import com.maven01.web.bean.PageInfoM;
 import com.maven01.web.service.ArticleBlockService;
 import com.maven01.web.service.ArticleService;
@@ -29,6 +33,15 @@ public class ArticleBlockController extends BaseController
 	private ArticleBlockService articleBlockService;
 	
 	
+    @RequestMapping("/ArticleBlock")    
+    public String article(ModelMap modelMap,Integer articleId)
+    {
+    	logger.info("请求 articleBlock:"+articleId);
+    	modelMap.addAttribute("articleId",articleId);
+        return "/web/articleBlock";
+    }   
+	
+	//**********增删该查
 	@RequestMapping("/queryList")
 	@ResponseBody	//page代表当前是第几页，rows代表每个页面显示多少数据
 	public PageInfoM<ArticleBlock> selectBlock(Integer page,Integer rows,Integer articleId)
@@ -51,15 +64,17 @@ public class ArticleBlockController extends BaseController
 	}
 	
 	
-	@RequestMapping ("/insert")
-	@ResponseBody
-	public Map<String,Object> insertBlock(Integer index,ArticleBlock articleBlock)
+	@RequestMapping (value="/insert",method=RequestMethod.POST)
+	@ResponseBody		//
+	public Map<String,Object> insert(@RequestBody ArticleBlockP p)
 	{
 		Map<String,Object>result=this.success(null);
+
+		logger.info(p.toString()+":"+p.getArticleBlock().getArticleId());
 		
 		try
 		{
-			articleBlockService.insertBlock(index,articleBlock);
+			articleBlockService.insertBlock(p.getIndex(),p.getArticleBlock());
 		}catch(Exception e)
 		{
 			result=this.error(e.getMessage());//把错误信息输出去
@@ -68,7 +83,6 @@ public class ArticleBlockController extends BaseController
 	}
 	
 
-	
 	@RequestMapping("/update")	//根据情况更新文章块
 	@ResponseBody
 	public Map<String,Object> update(@RequestBody ArticleBlock articleBlock)
@@ -98,6 +112,7 @@ public class ArticleBlockController extends BaseController
 	}
 	
 }
+
 
 
 

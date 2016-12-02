@@ -53,11 +53,11 @@
     <bean id="freemarkerResolver" 
     	class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
         <property name="order" value="1" />
-        <property name="suffix" value=".ftl" />
+        <property name="suffix" value=".html" />
         <property name="contentType" value="text/html;charset=utf-8" />
         <property name="viewClass">
-            <value>org.springframework.web.servlet.view.freemarker.FreeMarkerView</value>
-        </property>
+            <value>org.springframework.web.servlet.view.freemarker.FreeMarkerView	</value>
+        </property>		<!-- pageContext.request  页面上可以使用rc.contextPath来设置 -->
         <property name="requestContextAttribute" value="request" /> 
     </bean>
     <!-- ===================================================== -->

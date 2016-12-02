@@ -1,8 +1,9 @@
 package com.maven01.web.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ArticleBlock 
+public class ArticleBlock implements Serializable
 {
 	
     private Integer blockId;
@@ -10,6 +11,10 @@ public class ArticleBlock
     private Integer blockType;
     private String blockContent;
     private Date date;
+    
+    //生成一个默认的--
+    public ArticleBlock()
+    {}
 
     public Integer getBlockId() {
         return blockId;

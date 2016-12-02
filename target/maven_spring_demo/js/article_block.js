@@ -1,6 +1,10 @@
 
 $(function(){
 	
+	//两个全局性的变量
+	var globalArticleId;
+	var globalCurrentPage;
+	
 	//初始的时候，设置
 	var row=10;
 	var pages;
@@ -9,22 +13,24 @@ $(function(){
 	//第一次请求分页条的范围和信息
 	function init_data(num,row)	
 	{
-		var get_url ="/Article/queryList?page="+num+"&rows="+row;
+		var get_url ="/ArticleBlock/queryList";
+		
 		$.ajax({
 	        url:get_url,
 	        type:"get",
 	        async:true,
+	        data:{page:num,rows:row,articleId:48},
 	        success:function(data)
 	        {
 	        	console.log("成功取得数据,总分页数:"+data.pages);
 	        	pages= data.pages;		//总页数
 				
 				$('#pagination').bootpag({
-				    total: pages,          		// total pages
+				    total: pages,         		// total pages
 				    page: num,            		// default page
-				    maxVisible: 10,     			// visible pagination
+				    maxVisible: 10,     		// visible pagination
 				    leaps: true,        		// next/prev leaps through maxVisible
-				    firstLastUse: true,
+				    firstLastUse: true, 
 				    first: '第一页',
 				    last: '最后页',
 				    nextClass: 'next',
@@ -49,12 +55,14 @@ $(function(){
 	}
 	
 	
-	function get_ajax(num,row)
+	function get_ajax(num,row,articleId)
 	{
-		var get_url ="/Article/queryList?page="+num+"&rows="+row;   
+		//请求list;
+		var get_url ="/Article/queryList";   
 		$.ajax({
 	        url:get_url,
 	        type:"get",
+	        data:{page:num,rows:row,articleId:48},
 	        async:true,
 	        success:function(data)
 	        {
@@ -94,18 +102,18 @@ $(function(){
 	function show(data)
 	{
 		var content_str="";
-		var article_list=data.list;  
+		var block_list=data.list;  
 		
-		for(var index in article_list)
+		for(var index in block_list)
 		{
 			content_str+=
 			"			<div class=\"panel panel-default\">"+
 			"		     	<div class=\"panel-body\">"+
 			"		     		<div class=\"row\">"+
-			"			    		 <input type=\"checkbox\"> id:" + article_list[index].articleId +
+			"			    		 <input type=\"checkbox\"> id:" + block_list[index].blockId +
 			"			    	</div>	<!--row -->"+
 			"	    	 		<div class=\"col-md-12 content_div\">"+
-			"					 	<textarea class=\"form-control\" readonly  id=\"post_123\">"+article_list[index].articleName+"</textarea>"+
+			"					 	<textarea class=\"form-control\" readonly  id=\"post_123\">"+block_list[index].blockContent+"</textarea>"+
 			"					</div>"+
 			"					<div class=\"col-md-12\">"+
 			"			    		<button type=\"button\" class=\"btn btn-primary btn-sm edit_class\" >编辑</button>"+
@@ -116,7 +124,7 @@ $(function(){
 			"						<button type=\"button\" class=\"btn btn-primary btn-sm insert_img_class\">插入图片</button>"+
 			"						<button type=\"button\" class=\"btn btn-primary btn-sm move_down_class\">移上一位</button>"+
 			"						<button type=\"button\" class=\"btn btn-primary btn-sm move_up_class\">移下一位</button>"+
-			"						<input  type=\"hidden\" value=\""+ article_list[index].articleId +"\" >"+
+			"						<input  type=\"hidden\" value=\""+ block_list[index].blockId +"\" >"+
 			"						<input  type=\"hidden\" value=\"0\" >"+
 			"			    	</div>	<!--row -->		"+
 			"				</div> <!--panel-body-->	"+
@@ -191,11 +199,14 @@ $(function(){
 			
 			//获取了内容部分的div
 			var textArea = $(this).parent().parent(".panel-body").find('textarea');
-			var update_data = 	JSON.stringify({articleId:my_id,articleName:textArea.val()});
+			var update_data = 	JSON.stringify({blockId:my_id,
+												blockContent:textArea.val(),
+												articleId:48,
+												blockType:0});
 			
 			//提交代码
 			$.ajax({
-				url:"/Article/update",
+				url:"/ArticleBlock/update",
 				type:'post',
 				data:update_data,		//上传的数据
 				dataType:"json",      
@@ -224,23 +235,37 @@ $(function(){
 		});	//update click end
 		
 		
-		//点击插入按钮
 		//点击保存按钮的时候
-		$('button.insert_class').click(function()
+		$('button.insert_text_class').click(function()
 		{
 			//当前单元格的属性
 			var my_inputs = $(this).parent().children('input');
 			var my_id=my_inputs.eq(0).prop('value');
 			var my_type = my_inputs.eq(1).prop('value');
 			
+			//获取了内容部分的div
+			var textArea = $(this).parent().parent(".panel-body").find('textarea');
+			
+			var data1={
+					index:my_id,
+					"articleBlock":{
+							"articleId":48,
+							"blockContent":"",
+							"blockType":0,
+							"date":""
+							}
+						};
+			
 			//提交代码
 			$.ajax({
-				url:"/post/insertPost",	//插入文章碎片
+				url:"/ArticleBlock/insert",	//插入文章block
 				type:'post',
-				data:"{id:"+my_id+",content:"+textArea.val()+"}",
+				data:JSON.stringify(data1),
+				dataType:"json",      
+				contentType: "application/json",
 				success:function(data) 
 				{
-		    		cosole.log( "Data Loaded: " + data );
+		    		console.log( "Data Loaded: " + data );
 		    		//如果成功的话，提示成功，1秒消失
 				},
 				error:function(data)
@@ -266,11 +291,11 @@ $(function(){
 			//当前单元格的属性
 			var my_inputs = $(this).parent().children('input');
 			var my_id=my_inputs.eq(0).prop('value');
-			var delete_data={id:my_id};
+			var delete_data={blockId:my_id,articleId:48};
 			
 			//提交代码
 			$.ajax({
-				url:"/Article/delete",	//插入文章碎片
+				url:"/ArticleBlock/delete",	//插入文章碎片
 				type:'get',
 				data:delete_data,
 				success:function(data) 
@@ -319,7 +344,7 @@ $(function(){
 			
 		//提交代码
 		$.ajax({
-			url:"/Article/insertAndGetId",	//插入文章碎片
+			url:"/ArticleBlock/insertAndGetId",	//插入文章碎片
 			type:'post',
 			data:str,
 			dataType:"json",      

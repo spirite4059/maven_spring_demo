@@ -19,6 +19,17 @@
 		 <include refid="Base_Column_List" />
 		from article 
 	</select>
+	
+	
+	<!-- 通过id选择出一个实体类来 -->
+	<select id="getEntityById" resultMap="articleResult" parameterType="INTEGER">
+ 		select 
+	 	<include refid="Base_Column_List" />  
+			from article 
+		<where>
+			article_id = #{articleId}  
+		</where>
+	</select>	
 	  
   
  	<select id="getListByEntity" resultMap="articleResult" parameterType="com.maven01.web.bean.Article">
