@@ -34,7 +34,7 @@ public class ArticleBlockController extends BaseController
 	
 	
     @RequestMapping("/ArticleBlock")    
-    public String article(ModelMap modelMap,Integer articleId)
+    public String article(ModelMap modelMap,@RequestParam(required=false) Integer articleId)
     {
     	logger.info("请求 articleBlock:"+articleId);
     	modelMap.addAttribute("articleId",articleId);
