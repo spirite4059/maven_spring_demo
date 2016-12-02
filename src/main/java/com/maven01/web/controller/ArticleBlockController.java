@@ -38,7 +38,7 @@ public class ArticleBlockController extends BaseController
     {
     	logger.info("请求 articleBlock:"+articleId);
     	modelMap.addAttribute("articleId",articleId);
-        return "/web/articleBlock";
+        return "/web/article_block";
     }   
 	
 	//**********增删该查

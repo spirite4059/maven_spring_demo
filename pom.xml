@@ -206,7 +206,6 @@
 		    <artifactId>pagehelper</artifactId>
 		    <version>3.7.5</version>
 		</dependency>
-
     </dependencies> 
 
   <build>
