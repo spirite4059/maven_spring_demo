@@ -3,8 +3,15 @@ package com.maven01.web.util;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+
 public class util
 {	
+    // 判断是否 AJAX 请求
+    public static boolean useAjax(HttpServletRequest request) {
+        return "XMLHttpRequest".equalsIgnoreCase(request.getHeader("X-Requested-With"));
+    }
+	
 	static String get_web_path()
 	{	
 		return null;
@@ -20,7 +27,7 @@ public class util
 		  return retStrFormatNowDate;
 	}
 	
-	//获取系统毫秒时间，并装换成字符串
+	//获取系统毫秒时间，并装换成字符串--是个数字
 	static public Date getNowDate()
 	{
 		  Date nowTime = new Date(System.currentTimeMillis());

@@ -1,0 +1,55 @@
+/* 调节整体的格式
+  
+input,textarea {
+  position: relative;
+  border: 1px solid #95B8E7;
+  background-color: #fff;
+  vertical-align: middle;
+  display: inline-block;
+  overflow: hidden;
+  height:25px;
+  margin: 0;
+  padding: 0;
+  -moz-border-radius: 5px 5px 5px 5px;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+} */
+
+/* select {
+    -webkit-appearance: menulist;
+    box-sizing: border-box;
+    align-items: center;
+    white-space: pre;
+    -webkit-rtl-ordering: logical;
+    color: black;
+    background-color: white;
+    cursor: default;
+    border: 1px solid;
+    border-color: #95B8E7;
+    background-color: #fff;
+    border-radius: 5px 5px 5px 5px;
+} */
+
+.textbox {
+	height: 22px;
+	margin: 0;
+	padding: 0 2px;
+	box-sizing: content-box;
+}
+
+.table-bordered {
+	width:100%;
+    border-bottom:1px solid #95B8E7;
+    border-collapse: separate;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    border-spacing: 0;
+}
+
+.table-bordered td {
+    border-left: 1px solid #95B8E7;
+    border-top: 1px solid #95B8E7;
+    padding: 2px 3px;
+    line-height: 20px;
+}

@@ -1,0 +1,98 @@
+/*-------------------------------------------------------
+ All Rights Reserved, Copyright (C) 2013, Wuyeguo, Ltd.
+ …Ë÷√–°Õº±Í
+-------------------------------------------------------*/
+
+body { font:12px/1.2em Microsoft YaHei;}
+
+a,
+a:link { color:#000; text-decoration:none; outline:none;}
+a:hover,
+a:focus { text-decoration:none; color:#39f;}
+
+.pd3 { padding:3px;}
+.pd5 { padding:5px;}
+.pd10 { padding:10px;}
+
+label,
+button,
+input,
+select,
+textarea { font-size:12px; vertical-align: middle;}
+
+input,
+button,
+select,
+textarea { font:12px/1.2em Microsoft YaHei;}
+
+select,
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"],
+input[type="radio"],
+input[type="checkbox"] { cursor: pointer;}
+
+.tabs-tool { border-top:0;}
+.vrs-text,
+.vrs-textarea { padding:3px; border:1px #95b8e7 solid; width:260px;}
+.vrs-text { height:14px; line-height:14px; }
+
+.vrs-header { height:55px; position:relative; z-index:0; overflow:hidden; border-bottom:1px #95b8e7 solid; background:url(../images/bg_header.jpg) bottom repeat-x;}
+.vrs-header-left { position:absolute; z-index:1; left:15px; top:0;}
+.vrs-header-left h1 { font:20px/20px Verdana; color:#fff;}
+.vrs-header-right { position:absolute; z-index:1; right:5px; top:0; color:#fff; text-align:right;}
+.vrs-header-right p { line-height:0.7em;}
+.vrs-header-right a { color:#fff; margin:0 5px;}
+
+.vrs-sidebar { width:160px;}
+.vrs-side-tree .tree-node { padding:3px 0px; }
+.vrs-side-tree a { display:block;}
+.vrs-side-tree .tree-node-selected { padding:2px 0; border:1px #fade23 solid;}
+
+.vrs-toolbar-button,
+.vrs-toolbar-search { padding:3px 5px;}
+
+.vrs-footer { height:20px; padding:5px; text-align:center; overflow:hidden; background:#e0ecff;}
+
+
+.icon-application-system { background:url('../images/icons/icon-application-system.png') no-repeat center center;}
+.icon-system-user { background:url('../images/icons/icon-system-user.png') no-repeat center center;}
+.icon-system-area { background:url('../images/icons/icon-system-area.png') no-repeat center center;}
+.icon-system-role { background:url('../images/icons/icon-system-role.png') no-repeat center center;}
+.icon-system-res { background:url('../images/icons/icon-system-res.png') no-repeat center center;}
+.icon-system-help { background:url('../images/icons/icon-system-help.png') no-repeat center center;}
+
+.icon-application-business { background:url('../images/icons/icon-application-business.png') no-repeat center center;}
+.icon-business-user { background:url('../images/icons/icon-business-user.png') no-repeat center center;}
+.icon-business-shop { background:url('../images/icons/icon-business-shop.png') no-repeat center center;}
+.icon-business-device { background:url('../images/icons/icon-business-device.png') no-repeat center center;}
+.icon-business-ads { background:url('../images/icons/icon-business-ads.png') no-repeat center center;}
+
+.icon-application-ads { background:url('../images/icons/icon-application-ads.png') no-repeat center center;}
+.icon-ads-user { background:url('../images/icons/icon-ads-user.png') no-repeat center center;}
+.icon-ads-video { background:url('../images/icons/icon-ads-video.png') no-repeat center center;}
+.icon-ads-24-content { background:url('../images/icons/icon-ads-24-content.png') no-repeat center center;}
+.icon-ads-24 { background:url('../images/icons/icon-ads-24.png') no-repeat center center;}
+
+.icon-application-play { background:url('../images/icons/icon-application-play.png') no-repeat center center;}
+.icon-play-free { background:url('../images/icons/icon-play-free.png') no-repeat center center;}
+.icon-play-play { background:url('../images/icons/icon-play-play.png') no-repeat center center;}
+.icon-play-order { background:url('../images/icons/icon-play-order.png') no-repeat center center;}
+.icon-play-order-preview { background:url('../images/icons/icon-play-order-preview.png') no-repeat center center;}
+.icon-play-order-detail { background:url('../images/icons/icon-play-order-detail.png') no-repeat center center;}
+.icon-play-order-checked { background:url('../images/icons/icon-play-order-checked.png') no-repeat center center;}
+.icon-play-order-offline { background:url('../images/icons/icon-play-order-offline.png') no-repeat center center;}
+
+.icon-application-statictics { background:url('../images/icons/icon-application-statictics.png') no-repeat center center;}
+.icon-statictics-play { background:url('../images/icons/icon-statictics-play.png') no-repeat center center;}
+.icon-statictics-device { background:url('../images/icons/icon-statictics-device.png') no-repeat center center;}
+.icon-statictics-detail { background:url('../images/icons/icon-statictics-detail.png') no-repeat center center;}
+
+.icon-application-monitor { background:url('../images/icons/icon-application-monitor.png') no-repeat center center;}
+.icon-monitor-list { background:url('../images/icons/icon-monitor-list.png') no-repeat center center;}
+
+.icon-contextmenu-closeself{background:url('../images/icons/icon-contextmenu-closeself.png') no-repeat center center;}
+.icon-contextmenu-closeother{background:url('../images/icons/icon-contextmenu-closeother.png') no-repeat center center;}
+.icon-contextmenu-closeall{background:url('../images/icons/icon-contextmenu-closeall.png') no-repeat center center;}
+
