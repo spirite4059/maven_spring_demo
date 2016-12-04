@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.maven01.web.bean.Article;
 import com.maven01.web.bean.ArticleBlock;
-import com.maven01.web.bean.ArticleBlockP;
+import com.maven01.web.bean.ArticleBlockM;
 import com.maven01.web.bean.PageInfoM;
 import com.maven01.web.service.ArticleBlockService;
 import com.maven01.web.service.ArticleService;
@@ -66,7 +66,7 @@ public class ArticleBlockController extends BaseController
 	
 	@RequestMapping (value="/insert",method=RequestMethod.POST)
 	@ResponseBody		//
-	public Map<String,Object> insert(@RequestBody ArticleBlockP p)
+	public Map<String,Object> insert(@RequestBody ArticleBlockM p)
 	{
 		Map<String,Object>result=this.success(null);
 

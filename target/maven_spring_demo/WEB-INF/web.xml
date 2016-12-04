@@ -6,7 +6,10 @@
     				
     <context-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:spring-mybatis.xml</param-value>
+            <param-value>
+            	classpath:spring-mybatis.xml 
+            	classpath:spring-shiro.xml 
+            </param-value>
     </context-param>
     
     <!-- 没搞懂,提示缺少信息，设置一个默认的 -->
@@ -53,7 +56,7 @@
         <servlet-name>default</servlet-name>  
         <url-pattern>*.js</url-pattern>  
     </servlet-mapping>  
-
+	<!-- static resources end -->  
 
     <servlet>
         <servlet-name>spring</servlet-name>
@@ -66,7 +69,42 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
     
+    <!-- shiro filter -->
+	<filter>
+	    <filter-name>shiroFilter</filter-name>
+	    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	    <init-param>
+	        <param-name>targetFilterLifecycle</param-name>
+	        <param-value>true</param-value>
+        </init-param>
+	</filter>
+	<filter-mapping>
+	     <filter-name>shiroFilter</filter-name>
+	     <url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!-- shiro filter end -->
+    
+    
     <!--错误页面的处理  -->
+    <!--配置freemarker异常-->
+    <error-page>
+        <exception-type>freemarker.template.TemplateException</exception-type>
+        <location>/view/error/viewException.html</location>
+    </error-page>
+    
     <error-page>  
         <error-code>403</error-code>  
         <location>/html/404.html</location>  

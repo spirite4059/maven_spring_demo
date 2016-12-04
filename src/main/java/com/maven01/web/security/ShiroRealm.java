@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 /**
  * Refer: http://www.ibm.com/developerworks/cn/java/j-lo-shiro/
  * Shiro 从 Realm 获取安全数据(如用户、角色、权限), 就是说 SecurityManager 要验证用户身份,
@@ -24,15 +25,19 @@ import java.util.Map;
  * 也需要从 Realm 得到用户相应的角色/权限进行验证用户是否能进行操作;
  * 可以把 Realm 看成 DataSource, 即安全数据源。 
  */
-public class ShiroRealm extends AuthorizingRealm {
-    private static Logger logger = LoggerFactory.getLogger(ShiroRealm.class.getName());
-
+public class ShiroRealm extends AuthorizingRealm 
+{
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     private Map<String, String> usernamePasswords;
     private Map<String, List<String>> usernameRoles;
 
-    @Autowired
-    UserService userService;
-
+    @Autowired(required = true)
+    public UserService userService; //userService
+    
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+	
     public ShiroRealm() 
     {
         usernamePasswords = new HashMap<String, String>();

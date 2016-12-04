@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.maven01.web.dao.ResourceDao" >
+
+  <resultMap id="resourceResult" type="com.maven01.web.bean.Resource" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="text" property="text" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="parentId" property="parentid" jdbcType="INTEGER" />
+    <result column="isMenu" property="ismenu" jdbcType="INTEGER" />
+    <result column="isVirtual" property="isvirtual" jdbcType="INTEGER" />
+    <result column="menuCls" property="menucls" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="roleId" property="roleid" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="INTEGER" />
+  </resultMap>
+  
+  
+   <sql id="Base_Column_List" >
+    	id, url, text, remark, parentId, isMenu, isVirtual, menuCls, sort, roleId, userId
+   </sql>
+  
+  	<select id="getTreeList" resultMap="Resource" parameterType="int">
+		select * from resource where parent_id=#{parentId}
+	</select>
+  
+  	<select id="getList" resultMap="resourceResult">
+  		select 
+		 <include refid="Base_Column_List" />
+		from resource 
+	</select>
+	
+	<!-- 通过id选择出一个实体类来 -->
+	<select id="getEntityById" resultMap="resourceResult" parameterType="INTEGER">
+ 		select 
+	 	<include refid="Base_Column_List" />  
+			from resource 
+		<where>
+			id = #{id}  
+		</where>
+	</select>	
+
+    <delete id="deleteByEntity" parameterType="java.lang.Integer" >
+    	delete from resource
+    	where id = #{id,jdbcType=INTEGER}
+    </delete>
+  
+  
+    <insert id="insert" parameterType="Resource">
+	   insert into resource(
+	            text,
+	            url,
+	            remark,
+	            parent_id,
+	            is_menu,
+	            is_virtual,
+	            menu_cls
+	            ) values (
+	            #{text},
+	            #{url},
+	            #{remark},
+	            #{parentId},
+	            #{isMenu},
+	            #{isVirtual},
+	            #{menuCls}
+	            )
+    </insert>
+
+    <update id="update" parameterType="Resource">
+		update resource 
+		set 
+			text=#{text},
+			url=#{url},
+			parent_id=#{parentId},
+			is_menu=#{isMenu},
+			is_virtual=#{isVirtual},
+			menu_cls=#{menuCls},
+			remark=#{remark} 
+		where 
+			id = #{id}
+	</update>
+	
+	<select id="getUserMenuResourceList" resultMap="Resource" parameterType="int">
+		SELECT res.text,res.url,res.is_menu,res.menu_cls,res.parent_id,res.id,res.is_virtual 
+		FROM USER u 
+		LEFT JOIN role_user ru 
+			ON u.id=ru.user_id 
+		LEFT JOIN role r 
+		LEFT JOIN role_resource rr 
+			ON rr.role_id=r.id 
+		LEFT JOIN resource res 
+			ON res.id=rr.resource_id 
+			ON r.id=ru.role_id 
+		WHERE res.is_menu=1 and u.id=#{userId} 
+		ORDER BY sort ASC 
+	</select>
+	
+	
+  
+</mapper>
+
+
+
+
+

@@ -53,11 +53,16 @@
 		<property name="cacheManager" ref="cacheManager" />
 	</bean>
 	
-    <bean id="shiroRealm" class="com.maven01.web.security.ShiroRealm"/>
+    <bean id="shiroRealm" class="com.maven01.web.security.ShiroRealm">
+          <property name="userService" ref="userService"/>
+    </bean>
     
     <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
        <property name="cacheManagerConfigFile" value="classpath:ehcache.xml"/> 
     </bean>
+    
+    <!-- 上面用的 -->
+    <bean id="userService" class="com.maven01.web.service.Impl.UserServiceImpl"/>
     
 
     <!-- 基于Form表单的身份验证过滤器，不配置将也会注册此过虑器，表单中的用户账号、密码及loginurl将采用默认值，建议配置
@@ -74,5 +79,8 @@
         <property name="redirectUrl" value="/home" /> 
      </bean> 
    
+     <!--  
      <bean id="userInvalidFilter" class="com.gochinatv.accelarator.security.UserInvalidFilter"/>
+     -->
+     
 </beans>

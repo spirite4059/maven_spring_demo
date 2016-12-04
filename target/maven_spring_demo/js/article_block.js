@@ -1,13 +1,20 @@
 
 $(function(){
 	
-	//两个全局性的变量
-	var globalArticleId;
-	var globalCurrentPage;
+	var globalCurrentPage=1;//默认设置成1
+	var url=$.url();	
+	var globalArticleId=url.param("articleId");
+	
+	if(globalArticleId==undefined)
+	{	//异常,无法正常运行了
+		return;
+	}
 	
 	//初始的时候，设置
 	var row=10;
 	var pages;
+
+	
 	init_data(1,row);
 	
 	//第一次请求分页条的范围和信息
@@ -19,7 +26,7 @@ $(function(){
 	        url:get_url,
 	        type:"get",
 	        async:true,
-	        data:{page:num,rows:row,articleId:48},
+	        data:{page:num,rows:row,articleId:globalArticleId},	
 	        success:function(data)
 	        {
 	        	console.log("成功取得数据,总分页数:"+data.pages);
@@ -62,7 +69,7 @@ $(function(){
 		$.ajax({
 	        url:get_url,
 	        type:"get",
-	        data:{page:num,rows:row,articleId:48},
+	        data:{page:num,rows:row,articleId:globalArticleId},
 	        async:true,
 	        success:function(data)
 	        {
@@ -201,7 +208,7 @@ $(function(){
 			var textArea = $(this).parent().parent(".panel-body").find('textarea');
 			var update_data = 	JSON.stringify({blockId:my_id,
 												blockContent:textArea.val(),
-												articleId:48,
+												articleId:globalArticleId,
 												blockType:0});
 			
 			//提交代码
@@ -249,7 +256,7 @@ $(function(){
 			var data1={
 					index:my_id,
 					"articleBlock":{
-							"articleId":48,
+							"articleId":globalArticleId,
 							"blockContent":"",
 							"blockType":0,
 							"date":""
@@ -291,7 +298,7 @@ $(function(){
 			//当前单元格的属性
 			var my_inputs = $(this).parent().children('input');
 			var my_id=my_inputs.eq(0).prop('value');
-			var delete_data={blockId:my_id,articleId:48};
+			var delete_data={blockId:my_id,articleId:globalArticleId};
 			
 			//提交代码
 			$.ajax({
