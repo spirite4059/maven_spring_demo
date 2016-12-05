@@ -10,12 +10,12 @@ public class Resource {
     private Integer parentId;	//父级别id
     private Integer isMenu;		//是否显示菜单 1.显示  2.隐藏
     private Integer isVirtual;	//是否虚拟      1.虚拟  2、非虚拟
-    private String menucls;		//菜单样式（图片）
+    private String menuCls;		//菜单样式（图片）
     private Integer sort;		//排序值 
     private Integer roleid;		//临时，角色id
     private Integer userid;		//临时，用户id
  
-	private List<Resource> children;
+	private List<Resource> children;		//为了方便查找的资源子节点	
     
     public Integer getId() {
         return id;
@@ -78,12 +78,12 @@ public class Resource {
         this.isVirtual = isVirtual;
     }
 
-    public String getMenucls() {
-        return menucls;
+    public String getMenuCls() {
+        return menuCls;
     }
 
-    public void setMenucls(String menucls) {
-        this.menucls = menucls == null ? null : menucls.trim();
+    public void setMenuCls(String menuCls) {
+        this.menuCls = menuCls == null ? null : menuCls.trim();
     }
 
     public Integer getSort() {

@@ -1,0 +1,74 @@
+<#assign base=request.contextPath/>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>管理系统登陆页面</title>
+<style>
+body {font-family:"Microsoft Yahei"; font-size:12px; margin:0; background: #fff url(${base}/images/bg_login.jpg) 50% 0 no-repeat; }
+input[type="text"]:focus, input[type="password"]:focus { outline:none;}
+input::-ms-clear { display:none;}
+.login { margin:0 auto; width:370px; border:2px solid #eee; border-bottom:none; position:relative;background-color:#ffffff;}
+.web_login { width:370px; position:relative;padding-bottom:20px;}
+#web_login{_left:60px;*left:0;}
+.web_login .login_form { width:272px; margin:0 auto;margin-top:30px;}
+.web_login .input-tips {float:left;margin-top:10px;width:50px;height:42px;font-size:16px;line-height:42px;font-family:"Hiragino Sans GB", "Microsoft Yahei";}
+.web_login .inputOuter {width:200px;height:42px;margin-top:10px;float:left;}
+.web_login .inputstyle {width:200px;height:38px;padding-left:5px;line-height:30px;line-height:38px;border:1px solid #D7D7D7;background:#fff;color:#333;border-radius:2px;font-family:Verdana, Tahoma, Arial;font-size:16px;ime-mode:disabled;}
+.web_login input.inputstyle:focus{border: 1px solid #5796f;box-shadow: 0 0 0;}
+.web_login .uinArea {height:60px;position:relative;z-index:10;}
+.web_login .pwdArea {height:55px;margin-bottom:10px;position:relative;z-index:3;}
+.web_qr_login {position:relative;overflow:hidden;}
+h1{margin:80px auto 50px auto;text-align:center;color:#fff;margin-left:-25px;font-size:35px;font-weight: bold;text-shadow: 0px 1px 1px #555;}
+h1 sup{font-size: 18px;font-style: normal;position: absolute;margin-left: 10px;}
+.login {border:0;padding:5px 0;background: #fff;margin: 0 auto;-webkit-box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, .3);box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, .3);}
+.jianyi{color:#fff;text-align:center;margin-top:25px;color:#B3B8C4;}
+.button_blue{display:inline-block;float:left;height:41px;border-radius:4px;background:#2795dc;border:none;cursor:pointer;
+	border-bottom:3px solid #0078b3;*border-bottom:none;color:#fff;
+	font-size:16px;padding:0 10px;*width:140px;text-align:center;outline:none;font-family: "Microsoft Yahei",Arial, Helvetica, sans-serif;}
+input.button_blue:hover{background:#0081c1;border-bottom:3px solid #006698;*border-bottom:none;color:#fff;text-decoration:none;}
+</style>
+
+</head>
+<body>
+<h1>Business Manager<sup>V1.0</sup></h1>
+
+	<div class="login" style="margin-top: 50px;">
+
+		<!-- <div class="header">
+        <div class="switch" id="switch"><a class="switch_btn_focus" id="switch_qlogin" href="javascript:void(0);" tabindex="7">快速登录</a>
+			<a class="switch_btn" id="switch_login" href="javascript:void(0);" tabindex="8">快速注册</a><div class="switch_bottom" id="switch_bottom" style="position: absolute; width: 64px; left: 0px;"></div>
+        </div>
+    </div>   -->
+
+		<div class="web_qr_login" id="web_qr_login" style="display: block; height: 235px;">
+			<div class="web_login" id="web_login">
+				<div class="login-box">
+					<div class="login_form">
+						<form action="${base}/admin/login" name="loginform" id="login_form" class="loginForm" method="post">
+							<div class="uinArea" id="uinArea">
+								<label class="input-tips" for="u">帐号：</label>
+								<div class="inputOuter" id="uArea">
+									<input type="text" id="u" name="username" class="inputstyle" />
+								</div>
+							</div>
+							
+							<div class="pwdArea" id="pwdArea">
+								<label class="input-tips" for="p">密码：</label>
+								<div class="inputOuter" id="pArea">
+									<input type="password" id="p" name="password" class="inputstyle" />
+								</div>
+							</div>
+							
+							<div style="padding-left: 50px; margin-top: 20px;">
+								<input type="submit" value="登 录" style="width: 150px;" class="button_blue" />
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- <div class="jianyi">*推荐使用ie8或以上版本ie浏览器或Chrome内核浏览器访问本站</div> -->
+</body>
+</html>

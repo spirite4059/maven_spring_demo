@@ -32,6 +32,7 @@
     <!-- begin of sidebar -->
 	<div class="vrs-sidebar" data-options="region:'west',split:true,border:true,title:'导航菜单'"> 
     	<div class="easyui-accordion" data-options="border:false,fit:true">
+    		<!--  
     	    <#list resources as res>
     	       <div title="${res.text}" data-options="iconCls:'${res.menuCls}'" style="padding:5px;">
     	          <ul class="easyui-tree vrs-side-tree">
@@ -41,7 +42,9 @@
     	          </ul>
     	       </div>
 			</#list>
-        	<!-- <div title="系统管理" data-options="iconCls:'icon-application-system'" style="padding:5px;">  	
+			-->
+        	<!---->
+        	<div title="系统管理" data-options="iconCls:'icon-application-system'" style="padding:5px;">  	
     			<ul class="easyui-tree vrs-side-tree">
                 	<li iconCls="icon-system-user"><a href="javascript:void(0)" data-icon="icon-system-user" data-link="${base}/user/gotoList" iframe="1">用户列表</a></li>
                 	<li iconCls="icon-system-user"><a href="javascript:void(0)" data-icon="icon-system-user" data-link="${base}/role/gotoList" iframe="1">角色列表</a></li>
@@ -86,7 +89,7 @@
     			<ul class="easyui-tree vrs-side-tree">
                 	<li iconCls="icon-monitor-list"><a href="javascript:void(0)" data-icon="icon-monitor-list" data-link="${base}/deviceImage/gotoList" iframe="1">设备实时监控</a></li>
                 </ul>
-            </div> -->
+            </div> <!---->
 
         </div>
     </div>	
@@ -104,7 +107,7 @@
     
     <!-- begin of footer -->
 	<div class="vrs-footer" data-options="region:'south',border:true,split:true">
-    	&copy; 没啥版权
+    	&copy; @CopyRight Commicoder 
     </div>
     <!-- end of footer -->
 

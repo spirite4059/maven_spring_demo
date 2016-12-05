@@ -5,11 +5,11 @@ import java.util.Date;
 public class User {
     private Integer id;
 
-    private String username;
+    private String userName;
 
     private String password;
 
-    private String realname;
+    private String realName;
 
     private String mobile;
 
@@ -17,11 +17,11 @@ public class User {
 
     private String remark;
 
-    private Date createtime;
+    private Date createTime;
 
     private Integer status;
 
-    private Integer roleid;
+    private Integer roleId;
 
     public Integer getId() {
         return id;
@@ -32,11 +32,11 @@ public class User {
     }
 
     public String getUsername() {
-        return username;
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+    public void setUsername(String userName) {
+        this.userName = userName == null ? null : userName.trim();
     }
 
     public String getPassword() {
@@ -48,11 +48,11 @@ public class User {
     }
 
     public String getRealname() {
-        return realname;
+        return realName;
     }
 
-    public void setRealname(String realname) {
-        this.realname = realname == null ? null : realname.trim();
+    public void setRealname(String realName) {
+        this.realName = realName == null ? null : realName.trim();
     }
 
     public String getMobile() {
@@ -80,11 +80,11 @@ public class User {
     }
 
     public Date getCreatetime() {
-        return createtime;
+        return createTime;
     }
 
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
+    public void setCreatetime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public Integer getStatus() {
@@ -96,10 +96,13 @@ public class User {
     }
 
     public Integer getRoleid() {
-        return roleid;
+        return roleId;
     }
 
-    public void setRoleid(Integer roleid) {
-        this.roleid = roleid;
+    public void setRoleid(Integer roleId) {
+        this.roleId = roleId;
     }
 }
+
+
+

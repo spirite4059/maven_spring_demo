@@ -17,13 +17,7 @@ public class UserController
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping("/showInfo/{userId}")
-	public String showUserInfo(ModelMap modelMap, @PathVariable int userId)
-	{
-		User userInfo = userService.getUserById(userId);
-		modelMap.addAttribute("userInfo", userInfo);
-		return "/user/showInfo";
-	}
+
 }
 
 

@@ -1,33 +1,36 @@
 package com.maven01.web.bean;
 
-public class RoleUser {
+public class RoleUser 
+{
     private Integer id;
-
     private Integer roleid;
-
     private Integer userid;
 
     public Integer getId() {
-        return id;
+        return id;		
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.id = id;		
     }
 
     public Integer getRoleid() {
-        return roleid;
+        return roleid;   	
     }
 
     public void setRoleid(Integer roleid) {
-        this.roleid = roleid;
+        this.roleid = roleid;	
     }
 
     public Integer getUserid() {
-        return userid;
+        return userid;		
     }
 
     public void setUserid(Integer userid) {
         this.userid = userid;
     }
+    
 }
+
+
+

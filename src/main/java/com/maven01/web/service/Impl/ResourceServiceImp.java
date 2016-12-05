@@ -59,55 +59,54 @@ public class ResourceServiceImp  extends BaseServiceImp <Resource> implements Re
 	}
 	
 	
-	/**
-	 * 根据登录人的id查询所拥有的左侧菜单
-	 * @param roleId
-	 * @return
-	 * @throws Exception
-	 */
+	/**		根据登录人的id查询所拥有的左侧菜单;查出来的是当前用户所有的roleId	*/
 	public Collection<Resource> getUserMenuResourceList(int userId)throws Exception
 	{
+		
 		LinkedHashMap<Integer,Resource> treeMap = new LinkedHashMap<Integer,Resource>();
 		LinkedHashMap<Integer,Resource> modelMap = new LinkedHashMap<Integer,Resource>();
+				
+		
 		//左侧菜单的权限
 		List<Resource> resourceList = resourceDao.getUserMenuResourceList(userId);
-		for (Resource resource : resourceList) {
-			if(resource.getParentId()==-1){
+		
+		for (Resource resource : resourceList) 
+		{
+			if(resource.getParentId()==-1)
+			{	
+				//如果是-1，表示是最上层
 				treeMap.put(resource.getId(), resource);
-			}else{
-				if(resource.getIsVirtual()==1){//虚拟模块
-					modelMap.put(resource.getId(), resource);					
-				}else{
-					Resource res = modelMap.get(resource.getParentId());
-					if(res==null){
-						res= treeMap.get(resource.getParentId());
-					}
-					List<Resource> children = res.getChildren();
-					if(null==children){
-						children = new ArrayList<Resource>();
-					}
-					children.add(resource);
-					res.setChildren(children);
-				}
+			}else
+			{
+				//儿子菜单放在一起
+				modelMap.put(resource.getId(), resource);
 			}
 		}
 		
+		//遍历儿子菜单，把有父节点的放到相应的父节点下面
 		Iterator<Entry<Integer, Resource>> iterator = modelMap.entrySet().iterator();
-		while(iterator.hasNext()){
+		while(iterator.hasNext())
+		{
 			Entry<Integer, Resource> next = iterator.next();
-			Resource value = next.getValue();
-			int parentId = value.getParentId();
-			Resource resource = treeMap.get(parentId);
-			List<Resource> children = resource.getChildren();
-			if(null==children){
-				children = value.getChildren();
-			}else{
-				children.addAll(value.getChildren());;
+			Resource resource = next.getValue();
+			int parentId = resource.getParentId();
+			
+			//从treeMap里面找出来父亲节点
+			Resource pResource = treeMap.get(parentId);
+			
+			//没找到父节点，掠过
+			if(null != pResource)
+			{
+				if(null == pResource.getChildren())
+				{
+					pResource.setChildren(new ArrayList<Resource>()); 
+				}
+				pResource.getChildren().add(resource);	//把当前的节点放到父亲节点下面
 			}
-			resource.setChildren(children);
 		}
+		
+		//输出结构
 		Collection<Resource> values = treeMap.values();
 		return values;
 	}
-	
 }

@@ -1,12 +1,11 @@
 package com.maven01.web.bean;
 
-public class Role {
+public class Role 
+{	
     private Integer id;
-
     private String rolename;
-
     private String remark;
-
+    
     public Integer getId() {
         return id;
     }

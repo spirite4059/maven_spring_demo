@@ -22,9 +22,9 @@
 		<property name="filterChainDefinitions">
 			<value>
 				<!--  
-				/images/** = anon
-				/js/** = anon
-				/easyui/** = anon
+				/images/** = anon  
+				/js/** = anon  
+				/easyui/** = anon 
 				/css/** = anon
 				/download/* = anon
 				/nologin/* = anon

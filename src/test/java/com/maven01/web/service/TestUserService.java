@@ -1,7 +1,11 @@
 
 package com.maven01.web.service;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+
+import com.maven01.web.bean.Resource;
 import com.maven01.web.bean.User;
 import org.apache.log4j.Logger; 
 import org.junit.Test;
@@ -17,17 +21,45 @@ import com.alibaba.fastjson.JSON;
 public class TestUserService 
 {
 
-	private static final Logger LOGGER = Logger.getLogger(TestUserService.class);
+	private static final Logger logger = Logger.getLogger(TestUserService.class);
 	
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private ResourceService resourceService;
+	
+	@Test
+	public void testGetLeftMenu()
+	{
+		try {
+			Collection<Resource> test=resourceService.getUserMenuResourceList(1);
+			logger.debug("输出："+test.toString());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+//	@Test
+//	public void testResource() 
+//	{
+//		List<Resource> resourceList=new ArrayList<Resource>();
+//		try {
+//			resourceList=resourceService.getUserResourceList(1);
+//			logger.debug(resourceList);
+//			
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 	
 	@Test
 	public void testQueryById() 
 	{
-		User userInfo = userService.getUserById(1);
-		LOGGER.info("选择出来的是什么啊："+JSON.toJSON(userInfo));
+		//User userInfo = userService.getUserById(1);
+		//LOGGER.info("选择出来的是什么啊："+JSON.toJSON(userInfo));
 	}
 		
 	//	@Test

@@ -1,82 +1,114 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.maven01.web.dao.UserMapper" >
-  <resultMap id="BaseResultMap" type="com.maven01.web.bean.User" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="pass" property="pass" jdbcType="VARCHAR" />
-    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, name, pass, create_date
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from t_user
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from t_user
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.maven01.web.bean.User" >
-    insert into t_user (id, name, pass, 
-      create_date)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{pass,jdbcType=VARCHAR}, 
-      #{createDate,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="com.maven01.web.bean.User" >
-    insert into t_user
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="name != null" >
-        name,
-      </if>
-      <if test="pass != null" >
-        pass,
-      </if>
-      <if test="createDate != null" >
-        create_date,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="pass != null" >
-        #{pass,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null" >
-        #{createDate,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.maven01.web.bean.User" >
-    update t_user
-    <set >
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="pass != null" >
-        pass = #{pass,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null" >
-        create_date = #{createDate,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.maven01.web.bean.User" >
-    update t_user
-    set name = #{name,jdbcType=VARCHAR},
-      pass = #{pass,jdbcType=VARCHAR},
-      create_date = #{createDate,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+<mapper namespace="com.maven01.web.dao.UserDao" >
+
+	 <resultMap id="User" type="com.maven01.web.bean.User" >
+	    <id column="id" property="id" jdbcType="INTEGER" />
+	    <result column="userName" property="userName" jdbcType="VARCHAR" />
+	    <result column="password" property="password" jdbcType="VARCHAR" />
+	    <result column="realName" property="realName" jdbcType="VARCHAR" />
+	    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+	    <result column="email" property="email" jdbcType="VARCHAR" />
+	    <result column="remark" property="remark" jdbcType="VARCHAR" />
+	    <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+	    <result column="status" property="status" jdbcType="INTEGER" />
+	    <result column="roleId" property="roleId" jdbcType="INTEGER" />
+	 </resultMap>
+	  
+	 <sql id="Base_Column_List" >
+	    id, userName, password, realName, mobile, email, remark, createTime, status, roleId
+	 </sql>
+  
+  
+ 	<select id="getEntityById" resultMap="User" parameterType="int">
+		select * from user where id=#{id}
+	</select>
+	
+	<select id="getUserByUserName" resultMap="User" parameterType="com.maven01.web.bean.User">
+		select * from user where userName = #{userName}
+			<if test="id!=0">
+				and id!=#{id}
+			</if>
+	</select>
+	
+	<!-- 启用状态账号 -->
+	<select id="getLoginUser" resultMap="User" parameterType="string">
+		select * from user where userName = #{userName} and status=1
+	</select>
+
+	<select id="getListByEntity" resultMap="User" parameterType="com.maven01.web.bean.User">
+		select * from user
+		<where>
+			1=1
+			<if test="userName!=null">
+				and userName like CONCAT('%',#{userName},'%')
+			</if>
+			<if test="realName!=null">
+				and realName like CONCAT('%',#{realName},'%')
+			</if>
+		</where>
+		order by createTime desc
+	</select>
+	
+	<insert id="save" parameterType="com.maven01.web.bean.User">
+	   insert into user(
+	            userName,
+	            password,
+	            realName,
+	            mobile,
+	            email,
+	            remark,
+	            createTime,
+	            status
+	            ) values (
+	            #{userName},
+	            #{password},
+	            #{realName},
+	            #{mobile},
+	            #{email},
+	            #{remark},
+	            #{createTime},
+	            #{status}
+	            )
+	</insert>
+	
+	<update id="update" parameterType="com.maven01.web.bean.User">
+		update user
+		<set>
+			<if test="userName!=null">
+				userName=#{userName},
+			</if>
+			<if test="password!=null">
+				password=#{password},
+			</if>
+			<if test="realName!=null">
+				realName=#{realName},
+			</if>
+			<if test="mobile!=null">
+				mobile=#{mobile},
+			</if>
+			<if test="email!=null">
+				email=#{email},
+			</if>
+			<if test="status!=0">
+				status=#{status},
+			</if>
+			<if test="remark!=null">
+				remark=#{remark}
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="deleteByEntity" parameterType="com.maven01.web.bean.User">
+	  delete from user where id = #{id}
+	</delete>
+
+    <select id="getUsers" resultMap="User">
+		SELECT * FROM USER WHERE status=1 
+	</select>
+
+  
 </mapper>
+
+
