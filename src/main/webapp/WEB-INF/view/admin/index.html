@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css" href="${base}/css/index.css" />
 <link rel="stylesheet" type="text/css" href="${base}/css/form.css" />
 <link rel="stylesheet" type="text/css" href="${base}/easyui/themes/icon.css" />
-<script type="text/javascript" src="${base}/js/jquery.min.js"></script>
+<script type="text/javascript" src="${base}/js/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="${base}/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${base}/easyui/locale/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="${base}/easyui/jquery.xframe.js"></script>
@@ -67,5 +67,143 @@
 		<div data-options="iconCls:'icon-contextmenu-closeall'" id="closeall">关闭全部</div>
 	</div>
 	
+	<#include "/user/updatePwd.html">
+	<script type="text/javascript">
+		$(function() {
+			$("#updatePwdWindow").window('close');							//加载的另外一个用户密码账号窗口
+			
+			$('.vrs-side-tree a').bind("click", function() 
+			{
+				var title = $(this).text();
+				var url = $(this).attr('data-link');
+				var iconCls = $(this).attr('data-icon');
+				var iframe = $(this).attr('iframe') == 1 ? true : false;  	//是否在主窗口的tab上添加iframe,user是添加了的
+				addTab(title, url, iconCls, iframe);
+			});
+
+			//init 刚开始加载一个基础的说明页面
+			addTab('README', '${base}/admin/user/gotoUpgradeIndex', 'icon-system-help', true);
+			
+			//给tabs添加右键弹出菜单
+			$("#vrs-tabs").bind('contextmenu',function(e){
+		        e.preventDefault();
+		        $('#contextmenu').menu('show', {
+		            left: e.pageX,
+		            top: e.pageY
+		        });
+		    });
+			 
+		    $("#closeself").bind("click",function(){
+		        var tab 	= $('#vrs-tabs').tabs('getSelected');
+		        var index 	= $('#vrs-tabs').tabs('getTabIndex',tab);
+		        $('#vrs-tabs').tabs('close',index);
+		    });
+		    
+		    $("#closeother").bind("click",function(){
+		        var tablist = $('#vrs-tabs').tabs('tabs');
+		        var tab = $('#vrs-tabs').tabs('getSelected');
+		        var index = $('#vrs-tabs').tabs('getTabIndex',tab);
+		        for(var i=tablist.length-1;i>index;i--){
+		            $('#vrs-tabs').tabs('close',i);
+		        }
+		        var num = index-1;
+		        for(var i=num;i>=0;i--){
+		            $('#vrs-tabs').tabs('close',0);
+		        }
+		    });
+		    
+		    $("#closeall").bind("click",function(){
+		        var tablist = $('#vrs-tabs').tabs('tabs');
+		        for(var i=tablist.length-1;i>=0;i--){
+		            $('#vrs-tabs').tabs('close',i);
+		        }
+		    });
+		    
+		    //对表格的一些特征做了处理
+		    $("table","#addForm,#modifyForm").attr("class","table-bordered");
+			var table = "table[class='table-bordered']";
+			$("tr:eq(0) > td",table).attr("style","border-top:0px");
+			$("tr > td:even",table).attr("bgcolor","#E0ECFF");
+			$("tr > td:nth-child(1)",table).attr("style","border-left:0px");
+			$("tr > td:eq(0)",table).attr("style","border-left:0px;border-top:0px;");
+		});
+
+		/**
+		 * Name 添加菜单选项
+		 * Param title 名称
+		 * Param href 链接
+		 * Param iconCls 图标样式
+		 * Param iframe 链接跳转方式（true为iframe，false为href）
+		 */
+		function addTab(title, href, iconCls, iframe) {
+			var tabPanel = $('#vrs-tabs');
+			if (!tabPanel.tabs('exists', title)) 
+			{
+				var content = '<iframe marginheight="0" marginwidth="0" frameborder="0" src="'
+						+ href + '" height="100%" width="100%"></iframe>';
+				if (iframe) {
+					tabPanel.tabs('add', {
+						title : title,
+						content : content,
+						iconCls : iconCls,
+						fit : true,
+						cls : 'pd3',
+						closable : true
+					});
+				} else {
+					tabPanel.tabs('add', {
+						title : title,
+						href : href,
+						iconCls : iconCls,
+						fit : true,
+						cls : 'pd3',
+						closable : true
+					});
+				}
+			} else {	
+				//在tab里面有没有这个title，有就直接跳转选择这个页面
+				tabPanel.tabs('select', title);
+			}
+		}
+
+		//关闭选择的tab
+		function removeSelectedTab() {
+			var tabPanel = $('#vrs-tabs');
+			var tab = tabPanel.tabs('getSelected');
+			if (tab) {
+				var index = tabPanel.tabs('getTabIndex', tab);
+				tabPanel.tabs('close', index);
+			}
+		}
+		
+		function isExists(title){
+			var tabPanel = $('#vrs-tabs');
+			return tabPanel.tabs('exists', title);
+		}
+		
+		function removeTab(title) {
+			var tabPanel = $('#vrs-tabs');
+			if (isExists(title)) {
+				tabPanel.tabs('close', title);
+			}
+		}
+		
+		//刷新datagrid
+		function reloadTabGrid(refreshTitle, closeTitle) {
+			var tabPanel = $('#vrs-tabs');
+			if (tabPanel.tabs('exists', refreshTitle)) {
+				tabPanel.tabs('select', refreshTitle);
+				window.top.reload_Abnormal_Monitor.call();
+				tabPanel.tabs('close', closeTitle);
+			}
+		}
+		//修改密码
+		function updatePwd(){
+			$('#updatePwdWindow').window('open');
+			$('#modifyForm').form('clear');
+			$('#userId').val('${loginUser.id}');
+			
+		}
+	</script>
 </body>
 </html>

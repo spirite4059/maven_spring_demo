@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.maven01.web.dao.RoleUserDao">
 
-	<resultMap type="RoleUser" id="RoleUser">  
+	<resultMap id="RoleUser" type="com.maven01.web.bean.RoleUser">  
 		<id property="id" column="id" />
 		<result property="roleId" column="role_id" />
 		<result property="userId" column="user_id" />
@@ -21,7 +21,7 @@
 	    </foreach>
 	</insert>
 	
-	<delete id="deleteByEntity" parameterType="RoleUser">
+	<delete id="deleteByEntity" parameterType="com.maven01.web.bean.RoleUser">
 	  delete from role_user where roleId = #{roleId}
 	</delete>
 	

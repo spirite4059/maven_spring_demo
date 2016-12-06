@@ -1,0 +1,240 @@
+<#assign base=request.contextPath/>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>后台管理系统</title>
+
+<link rel="stylesheet" type="text/css" href="${base}/easyui/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css" href="${base}/css/index.css" />
+<link rel="stylesheet" type="text/css" href="${base}/css/form.css" />
+<link rel="stylesheet" type="text/css" href="${base}/easyui/themes/icon.css" />
+<script type="text/javascript" src="${base}/js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="${base}/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="${base}/easyui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="${base}/easyui/jquery.xframe.js"></script>
+</head>
+
+<body class="easyui-layout">
+
+	<!-- begin of header -->
+	<div class="vrs-header" data-options="region:'north',border:false,split:true">
+    	<div class="vrs-header-left">
+        	<h1>GoChinaTV Business Manager</h1>
+        </div>
+        <div class="vrs-header-right">
+        	<p><strong class="easyui-tooltip"></strong><a href="javascript:void(0);" onclick="updatePwd();">${(loginUser.userName)!""}</a>，欢迎您！</p>
+            <p><a href="/admin/logout">安全退出</a></p>
+        </div>
+    </div>
+    <!-- end of header -->
+    
+    <!-- begin of sidebar -->
+	<div class="vrs-sidebar" data-options="region:'west',split:true,border:true,title:'导航菜单'"> 
+    	<div class="easyui-accordion" data-options="border:false,fit:true">
+			<div title="系统管理" data-options="iconCls:'icon-application-system'" style="padding:5px;">  	
+    			<ul class="easyui-tree vrs-side-tree">
+                	<li iconCls="icon-system-user"><a href="javascript:void(0)" data-icon="icon-system-user" data-link="${base}/user/gotoList" iframe="1">用户列表</a></li>
+                	<li iconCls="icon-system-user"><a href="javascript:void(0)" data-icon="icon-system-user" data-link="${base}/role/gotoList" iframe="1">角色列表</a></li>
+                	<li iconCls="icon-system-user"><a href="javascript:void(0)" data-icon="icon-system-user" data-link="${base}/resource/gotoList" iframe="1">资源列表</a></li>
+                	<li iconCls="icon-system-area"><a href="javascript:void(0)" data-icon="icon-system-area" data-link="${base}/area/gotoList" iframe="1">地域列表</a></li>
+                </ul>
+            </div>
+            
+            <div title="商家管理" data-options="iconCls:'icon-application-business'" style="padding:5px;">  	
+    			<ul class="easyui-tree vrs-side-tree">
+                	<li iconCls="icon-business-user"><a href="javascript:void(0)" data-icon="icon-business-user" data-link="${base}/business/gotoList" iframe="1">商家列表</a></li>
+                    <li iconCls="icon-business-shop"><a href="javascript:void(0)" data-icon="icon-business-shop" data-link="${base}/place/gotoList" iframe="1">商铺列表</a></li>
+                    <li iconCls="icon-business-device"><a href="javascript:void(0)" data-icon="icon-business-device" data-link="${base}/device/gotoList" iframe="1">设备列表</a></li>
+                    <li iconCls="icon-business-ads"><a href="javascript:void(0)" data-icon="icon-business-ads" data-link="${base}/system_advertisement/gotoList" iframe="1">商家广告列表</a></li>
+                </ul>
+            </div>
+            
+            <div title="广告管理" data-options="iconCls:'icon-application-ads'" style="padding:5px;">  	
+    			<ul class="easyui-tree vrs-side-tree">
+                	<li iconCls="icon-ads-user"><a href="javascript:void(0)" data-icon="icon-ads-user" data-link="${base}/advertiser/gotoList" iframe="1">广告商列表</a></li>
+                    <li iconCls="icon-ads-video"><a href="javascript:void(0)" data-icon="icon-ads-video" data-link="${base}/advertisement/gotoList" iframe="1">广告列表</a></li>
+                </ul>
+            </div>
+            
+            <div title="播控管理" data-options="iconCls:'icon-application-play'" style="padding:5px;">  	
+    			<ul class="easyui-tree vrs-side-tree">
+    			    <li iconCls="icon-play-free"><a href="javascript:void(0)" data-icon="icon-play-free" data-link="${base}/orders/gotoAvailableList" iframe="1">可用广告位</a></li>
+                	<li iconCls="icon-play-play"><a href="javascript:void(0)" data-icon="icon-play-play" data-link="${base}/orders/gotoPlayList" iframe="1">在播广告</a></li>
+                	<li iconCls="icon-play-order"><a href="javascript:void(0)" data-icon="icon-play-order" data-link="${base}/orders/gotoList" iframe="1">订单列表</a></li>
+                </ul>
+            </div>
+            
+            <div title="排播组合" data-options="iconCls:'icon-application-statictics'" style="padding:5px;">  	
+    			<ul class="easyui-tree vrs-side-tree">
+                	<li iconCls="icon-statictics-play"><a href="javascript:void(0)" data-icon="icon-statictics-play" data-link="${base}/play_list/gotoOnlineAdList" iframe="1">在播广告组合</a></li>
+                	<li iconCls="icon-statictics-device"><a href="javascript:void(0)" data-icon="icon-statictics-device" data-link="${base}/play_list/gotoDeviceList" iframe="1">设备播放列表</a></li>
+                	<li iconCls="icon-statictics-detail"><a href="javascript:void(0)" data-icon="icon-statictics-detail" data-link="${base}/orders/gotoList" iframe="1">设备播放详情</a></li>
+                </ul>
+            </div>
+            
+             <div title="监控管理" data-options="iconCls:'icon-application-monitor'" style="padding:5px;">  	
+    			<ul class="easyui-tree vrs-side-tree">
+                	<li iconCls="icon-monitor-list"><a href="javascript:void(0)" data-icon="icon-monitor-list" data-link="${base}/deviceImage/gotoList" iframe="1">设备实时监控</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>	
+    <!-- end of sidebar -->   
+     
+    <!-- begin of main -->
+    <div class="vrs-main" data-options="region:'center'">
+        <div id="vrs-tabs" class="easyui-tabs" data-options="border:false,fit:true">  
+            <div title="用户列表" data-options="closable:false" style="overflow:hidden">
+               <iframe marginheight="0" marginwidth="0" frameborder="0" src="${base}/user/to_list" height="100%" width="100%"></iframe>
+            </div>-->
+        
+    </div>
+    <!-- end of main --> 
+    
+    <!-- begin of footer -->
+	<div class="vrs-footer" data-options="region:'south',border:true,split:true">
+    	&copy; @CopyRight Commicoder 
+    </div>
+    <!-- end of footer -->
+
+	<div id="contextmenu" class="easyui-menu">
+		<div data-options="iconCls:'icon-contextmenu-closeself'" id="closeself">关闭</div>
+		<div data-options="iconCls:'icon-contextmenu-closeother'" id="closeother">关闭其他</div>
+		<div data-options="iconCls:'icon-contextmenu-closeall'" id="closeall">关闭全部</div>
+	</div>
+	
+	<#include "/user/updatePwd.html">
+	<script type="text/javascript">
+		$(function() {
+			$("#updatePwdWindow").window('close');
+			$('.vrs-side-tree a').bind("click", function() 
+			{
+				var title = $(this).text();
+				var url = $(this).attr('data-link');
+				var iconCls = $(this).attr('data-icon');
+				var iframe = $(this).attr('iframe') == 1 ? true : false;
+				addTab(title, url, iconCls, iframe);
+			});
+
+			//init 
+			addTab('README', '${base}/user/gotoUpgradeIndex', 'icon-system-help', true);
+			
+			$("#vrs-tabs").bind('contextmenu',function(e){
+		        e.preventDefault();
+		        $('#contextmenu').menu('show', {
+		            left: e.pageX,
+		            top: e.pageY
+		        });
+		    });
+			 
+		    $("#closeself").bind("click",function(){
+		        var tab = $('#vrs-tabs').tabs('getSelected');
+		        var index = $('#vrs-tabs').tabs('getTabIndex',tab);
+		        $('#vrs-tabs').tabs('close',index);
+		    });
+		    
+		    $("#closeother").bind("click",function(){
+		        var tablist = $('#vrs-tabs').tabs('tabs');
+		        var tab = $('#vrs-tabs').tabs('getSelected');
+		        var index = $('#vrs-tabs').tabs('getTabIndex',tab);
+		        for(var i=tablist.length-1;i>index;i--){
+		            $('#vrs-tabs').tabs('close',i);
+		        }
+		        var num = index-1;
+		        for(var i=num;i>=0;i--){
+		            $('#vrs-tabs').tabs('close',0);
+		        }
+		    });
+		    
+		    $("#closeall").bind("click",function(){
+		        var tablist = $('#vrs-tabs').tabs('tabs');
+		        for(var i=tablist.length-1;i>=0;i--){
+		            $('#vrs-tabs').tabs('close',i);
+		        }
+		    });
+		    
+		    $("table","#addForm,#modifyForm").attr("class","table-bordered");
+			var table = "table[class='table-bordered']";
+			$("tr:eq(0) > td",table).attr("style","border-top:0px");
+			$("tr > td:even",table).attr("bgcolor","#E0ECFF");
+			$("tr > td:nth-child(1)",table).attr("style","border-left:0px");
+			$("tr > td:eq(0)",table).attr("style","border-left:0px;border-top:0px;");
+		});
+
+		/**
+		 * Name 添加菜单选项
+		 * Param title 名称
+		 * Param href 链接
+		 * Param iconCls 图标样式
+		 * Param iframe 链接跳转方式（true为iframe，false为href）
+		 */
+		function addTab(title, href, iconCls, iframe) {
+			var tabPanel = $('#vrs-tabs');
+			if (!tabPanel.tabs('exists', title)) {
+				var content = '<iframe marginheight="0" marginwidth="0" frameborder="0" src="'
+						+ href + '" height="100%" width="100%"></iframe>';
+				if (iframe) {
+					tabPanel.tabs('add', {
+						title : title,
+						content : content,
+						iconCls : iconCls,
+						fit : true,
+						cls : 'pd3',
+						closable : true
+					});
+				} else {
+					tabPanel.tabs('add', {
+						title : title,
+						href : href,
+						iconCls : iconCls,
+						fit : true,
+						cls : 'pd3',
+						closable : true
+					});
+				}
+			} else {
+				tabPanel.tabs('select', title);
+			}
+		}
+
+		function removeSelectedTab() {
+			var tabPanel = $('#vrs-tabs');
+			var tab = tabPanel.tabs('getSelected');
+			if (tab) {
+				var index = tabPanel.tabs('getTabIndex', tab);
+				tabPanel.tabs('close', index);
+			}
+		}
+		
+		function isExists(title){
+			var tabPanel = $('#vrs-tabs');
+			return tabPanel.tabs('exists', title);
+		}
+		
+		function removeTab(title) {
+			var tabPanel = $('#vrs-tabs');
+			if (isExists(title)) {
+				tabPanel.tabs('close', title);
+			}
+		}
+		
+		//刷新datagrid
+		function reloadTabGrid(refreshTitle, closeTitle) {
+			var tabPanel = $('#vrs-tabs');
+			if (tabPanel.tabs('exists', refreshTitle)) {
+				tabPanel.tabs('select', refreshTitle);
+				window.top.reload_Abnormal_Monitor.call();
+				tabPanel.tabs('close', closeTitle);
+			}
+		}
+		//修改密码
+		function updatePwd(){
+			$('#updatePwdWindow').window('open');
+			$('#modifyForm').form('clear');
+			$('#userId').val('${loginUser.id}');
+			
+		}
+	</script>
+</body>
+</html>

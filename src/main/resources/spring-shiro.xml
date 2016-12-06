@@ -27,6 +27,7 @@
 				/css/** = anon
 				/download/* = anon
 				/nologin/* = anon
+				/html/* = anon 
 				
 				/admin/home = anon
 				/admin/logout = logout

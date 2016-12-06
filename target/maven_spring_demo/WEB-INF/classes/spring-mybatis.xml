@@ -62,6 +62,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="mapperLocations" value="classpath:com/maven01/web/mapping/*.xml" />
 		<property name="configLocation" value="classpath:mybatis-configuration.xml" />
+		<property name="typeAliasesPackage" value="com.maven01.web.bean" />
 	</bean>
 	
 	<!-- mybatis扫描相关的dao -->
