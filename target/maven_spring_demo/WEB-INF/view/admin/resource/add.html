@@ -1,0 +1,79 @@
+<script type="text/javascript">
+	function add(){
+		var row = grid.treegrid('getSelected');
+		if(row){
+			addWin.window('open');
+			$("#add_save").linkbutton("enable");
+			$("#parentResourceName").val(row.text);
+			$("#parentId").val(row.id);
+		}else{
+			$.messager.show({title:'警告',msg:'请先选择地域项。'});
+	    }
+    }
+
+	function addCallback(data){
+		if(data.status){
+			 addWin.window('close');
+			 grid.treegrid('reload',$("#queryForm").serializeObject());	
+		}else{
+			$.messager.alert('系统提示',data.msg,'warning');
+		}
+	}
+</script>
+
+<div id="add-window" title="新增资源信息" class="easyui-window">
+	     <form id="addForm" method="post" >
+	    	<table cellpadding="5">
+	    		<tr>
+	    			<td>父级资源：
+	    			  <input type="hidden" id="parentId" name="parentId"/>
+	    			</td>
+	    			<td><input class="easyui-validatebox textbox" type="text" id="parentResourceName" readonly="readonly"/></td>
+	    		</tr>
+	    		
+	    		<tr>
+	    			<td>资源名称：</td>
+	    			<td><input class="easyui-validatebox textbox" type="text" name="text" data-options="required:true"/><label style="color: red"> *</label></td>
+	    		</tr>
+	    		
+	    		<tr>
+	    			<td>资源地址：</td>
+	    			<td><input class="easyui-validatebox textbox" type="text" name="url"/></td>
+	    		</tr>
+	    		
+	    		<tr>
+	    			<td>是否菜单显示：</td>
+	    			<td>
+	    			   <input type="radio" name="isMenu" value="1" />是
+	    			   <input type="radio" name="isMenu" value="2" checked="checked"/>否
+	    			</td>
+	    		</tr>
+	    		
+	    		<tr>
+	    			<td>是否虚拟：</td>
+	    			<td>
+	    			   <input type="radio" name="isVirtual" value="1" />是
+	    			   <input type="radio" name="isVirtual" value="2" checked="checked"/>否
+	    			</td>
+	    		</tr>
+	    		
+	    		<tr>
+	    			<td>菜单样式：</td>
+	    			<td>
+	    			  <select id="menuCls" name="menuCls" class="easyui-combobox" data-options="required:true,editable:false,showItemIcon:true"  style="width:171px;"></select>
+	    			</td>
+	    		</tr>
+	    		
+	    		<tr>
+	    			<td>备注：</td>
+	    			<td colspan="3">
+	    			    <input class="easyui-textbox" name="remark" data-options="multiline:true" style="height:70px"/>
+	    			</td>
+	    		</tr>
+               </table>
+            </form>
+            <div style="text-align:center;padding:5px">
+   			   <a id="add_save" href="javascript:void(0)" class="easyui-linkbutton" onclick="addSave('save');">保存</a>
+    	       <a href="javascript:void(0)" class="easyui-linkbutton" onclick="cancel()">关闭</a>
+	    	</div>
+    </div>

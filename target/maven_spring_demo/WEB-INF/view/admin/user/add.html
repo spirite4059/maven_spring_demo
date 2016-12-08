@@ -1,0 +1,49 @@
+<div id="add-window" title="新增用户信息" class="easyui-window">
+	     <form id="addForm" method="post" >
+	    	<table cellpadding="5">
+	    		<tr>
+	    			<td>用户名：</td>
+	    			<td>
+	    			    <input class="easyui-validatebox textbox" type="text" id="add_check" name="userName" onblur="checkUserName(this.id, 0, this.value, '${base}/user/checkUserName');" data-options="required:true"/><label style="color: red"> *</label></td>
+	    		</tr>
+	    		<tr>
+	    			<td>真实姓名：</td>
+	    			<td><input class="easyui-validatebox textbox" type="text" name="realName" data-options="required:true"/><label style="color: red"> *</label></td>
+	    		</tr>
+	    		<tr>
+	    			<td>密码：</td>
+	    			<td><input class="easyui-validatebox textbox" id="password" type="password" name="password" data-options="required:true"/><label style="color: red"> *</label></td>
+	    		</tr>
+	    		<tr>
+	    			<td>确认密码：</td>
+	    			<td><input class="easyui-validatebox textbox" id="ret_password" type="password" name="ret_password" onblur="checkRetPassword();" data-options="required:true"/><label style="color: red"> *</label></td>
+	    		</tr>
+	    		<tr>
+	    			<td>手机：</td>
+	    			<td><input class="easyui-validatebox textbox" type="text" name="mobile" data-options="required:true"/><label style="color: red"> *</label></td>
+	    		</tr>
+	    		<tr>
+	    			<td>电子邮箱：</td>
+	    			<td><input class="easyui-validatebox textbox" type="text" name="email" data-options="required:true,validType:'email'"/><label style="color: red"> *</label></td>
+	    		</tr>
+	    		<tr>
+	    			<td>状态：</td>
+	    			<td colspan="3"><select id="add_status" class="easyui-combobox" data-options="required:true,editable:false" name="status" style="width:171px;">
+			           		<option value="1" selected>启用</option>
+		    				<option value="2">禁用</option>
+		    			</select>
+		    		</td>
+		    	</tr>
+	    		<tr>
+	    			<td>备注：</td>
+	    			<td colspan="3">
+	    			    <input class="easyui-textbox" name="remark" data-options="multiline:true" style="height:70px"/>
+	    			</td>
+	    		</tr>
+               </table>
+            </form>
+            <div style="text-align:center;padding:5px">
+   			   <a id="add_save" href="javascript:void(0)" class="easyui-linkbutton" onclick="addCheckSave('save');">保存</a>
+    	       <a href="javascript:void(0)" class="easyui-linkbutton" onclick="cancel()">关闭</a>
+	    	</div>
+    </div>

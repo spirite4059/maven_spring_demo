@@ -61,9 +61,11 @@
         <property name="requestContextAttribute" value="request" /> 
     </bean>
     <!-- ===================================================== -->
-    <!-- ViewResolver For FreeMarkerConfigurer -->
-    <!-- ===================================================== -->
-    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+    <!-- ViewResolver For FreeMarkerConfigurer  修改使用shiro tag -->
+    <!-- ===================================================== 
+    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer"> -->
+    
+    <bean id="freemarkerConfig" class="com.maven01.web.security.ShiroTagFreeMarkerConfigurer">
         <property name="templateLoaderPath">
             <value>/WEB-INF/view/</value>
         </property>
@@ -79,7 +81,7 @@
                 <prop key="whitespace_stripping">true</prop>
                 <prop key="tag_syntax">auto_detect</prop>
                 <prop key="url_escaping_charset">UTF-8</prop>
-                 <!-- 自定义的freemark异常处理-->
+                 <!-- 自定义的freemark异常处理;挡住页面报错-->
                 <prop key = "template_exception_handler">com.maven01.web.security.FreemarkerExceptionHandler</prop>
             </props>
         </property>

@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<#include "../frame/pageInclude.html">
+<link rel="stylesheet" type="text/css" href="${base}/css/index.css" />
+<script type="text/javascript" src="${base}/js/static.js"></script>
+<script type="text/javascript">
+	$(function() {
+		grid =	$('#resourceTree').treegrid({
+			nowrap: false,
+			rownumbers: true,
+			mouseoverShowObar:true,
+			fit:true,
+			fitColumns:true,
+			animate:true,
+			url:'${base}/admin/resource/queryList',
+			idField:'id',
+			treeField:'text',
+			height:420,
+			width:800,
+			toolbar:'#toolbar',
+			onDblClickRow:function(row){
+				modifyRow(row);
+			}
+		});
+		
+		$("#add-window, #modify-window").window({
+			width : 400,
+			height : 360
+		});
+		$('#menuCls,#up_menuCls').combobox({
+			data:res_tree
+		});
+	});
+	
+	function formatMenu(val){
+		if(val=='1'){
+			return '是';
+		}
+		return '否';
+	}
+</script>
+</head>
+<body>
+
+	 <table class="easyui-datagrid" id="resourceTree">
+		<thead>
+			<tr>
+				<th data-options="field:'text',width:100">资源名称</th>
+				<th data-options="field:'url',width:150">资源URL</th>
+				<th data-options="field:'isMenu',width:80,formatter:formatMenu">是否菜单显示</th>
+				<th data-options="field:'isVirtual',width:80,formatter:formatMenu">是否虚拟</th>
+				<th data-options="field:'sort',width:80">排序</th>
+			</tr>
+		</thead>
+	</table>
+	
+	<div id="toolbar" style="padding:2px 5px;">
+		<a href="javascript:void(0);" onclick="add();" class="easyui-linkbutton" data-options="iconCls:'icon-add',toggle:true">新增</a>
+		<a href="javascript:void(0);" onclick="modify();" class="easyui-linkbutton" data-options="iconCls:'icon-edit',toggle:true">编辑</a>
+		<a href="javascript:void(0);" onclick="deleteArea();" class="easyui-linkbutton" data-options="iconCls:'icon-remove',toggle:true">删除</a>
+	</div>
+	<#include "./add.html">
+	<#include "./update.html">
+</body>
+
+</html>
+
+
+

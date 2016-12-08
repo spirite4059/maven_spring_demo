@@ -78,8 +78,8 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-	<!-- 注解方式配置事物 -->
-	<!-- <tx:annotation-driven transaction-manager="transactionManager" /> -->
+	<!-- 注解方式配置事物 :开了之后应该能在程序里面用注解-->
+	<!-- --> <tx:annotation-driven transaction-manager="transactionManager" />
 
 	<!-- 拦截器方式配置事物 -->
 	<tx:advice id="transactionAdvice" transaction-manager="transactionManager">

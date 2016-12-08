@@ -29,7 +29,7 @@ public class UserServiceImp extends BaseServiceImp <User> implements UserService
 	{
 		User user=new User();
 		user.setId(id);
-		user.setUsername(userName);
+		user.setUserName(userName);
 		
 		return userDao.getUserByUserName(user);
 	}

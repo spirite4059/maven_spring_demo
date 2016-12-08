@@ -220,13 +220,20 @@
 	       <artifactId>ehcache</artifactId>
 	       <version>2.9.0</version>
 	    </dependency>
-	    
-	    <!-- 字符串处理类  -->
+		
+		<!-- 字符串处理类  -->
 		<dependency>
 		    <groupId>commons-lang</groupId>
 		    <artifactId>commons-lang</artifactId>
 		    <version>2.6</version>
 		</dependency>
+		
+		<!-- 在freemark使用shiro标签  1.6jdk无法使用,使用的源码
+		<dependency>
+			<groupId>net.mingsoft</groupId>
+			<artifactId>shiro-freemarker-tags</artifactId>
+			<version>0.1</version>
+		</dependency>		-->
 		
     </dependencies> 
 

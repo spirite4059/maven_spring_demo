@@ -98,9 +98,9 @@ public class UserController extends BaseController
 	public Map<String,Object> save(User user){
 		Map<String,Object> result = this.success(null);
 		try{
-			User u = userService.getUserByUserName(user.getId(), user.getUsername());
+			User u = userService.getUserByUserName(user.getId(), user.getUserName());
 			if(u == null || "".equals(u)){
-				user.setCreatetime(new Date());
+				user.setCreateTime(new Date());
 				user.setPassword(Md5Util.md5(user.getPassword()));
 //				user.setStatus(1);
 				userService.insert(user);
@@ -118,7 +118,7 @@ public class UserController extends BaseController
 	public Map<String,Object> update(User user){
 		Map<String,Object> result = this.success(null);
 		try{
-			User u = userService.getUserByUserName(user.getId(), user.getUsername());
+			User u = userService.getUserByUserName(user.getId(), user.getUserName());
 			if(u == null || "".equals(u)){
 				String pwd = user.getPassword();
 				if(StringUtils.isNotBlank(pwd)){

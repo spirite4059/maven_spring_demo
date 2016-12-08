@@ -90,10 +90,11 @@
 			ON ru.roleId=rr.roleId
 		LEFT JOIN resource res
 			ON rr.resourceId=res.id
-		WHERE res.url is not null and res.url!='' and u.id=#{userId}  
+		WHERE res.isMenu=1 and res.url is not null and res.url!='' and u.id=#{userId}  
 		ORDER BY sort ASC 
 	</select>
 	
+	<!-- 用户权限：可以是所有 -->
 	<select id="getUserResourceList" resultMap="resourceResult" parameterType="int">
 		SELECT res.text,res.url,res.isMenu,res.menuCls,res.parentId,res.id 
 		FROM USER u 

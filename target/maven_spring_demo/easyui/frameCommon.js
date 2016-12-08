@@ -174,6 +174,7 @@ function queryWithCode(){
 	query();
 }
 
+//?? 什么地方定义的??  加了参数做查询  
 function query(){
 	grid.datagrid('reload',$("#queryForm").serializeObject());	
 }
@@ -315,35 +316,35 @@ function pressEnter(event,functionname){
 }
 
 $(function(){
-	
-	var default_option = "<option value=''>--请选择--</option>";
-	var country = $("select[id$='countryCode']");
-	country.html("");
-	country.append(default_option);
-	for (i = 0; i < _country.length; i++) {
-		country.append("<option value="+_country[i].id+">"+_country[i].text+"</option>");
-	}
-	
-	$("select[id$='areaCode'],select[id$='cityCode']").html(default_option);
-	
-	$("select[id$='countryCode'],select[id$='areaCode']").change(function(){
-		   var value = $(this).val();
-		   var targetId = $(this).attr("target");
-		   var data = eval("_"+value);
-		   $("#"+targetId).html(default_option);
-		   for (i = 0; i < data.length; i++) {
-				$("#"+targetId).append("<option value="+data[i].id+">"+data[i].text+"</option>");
-			}
-	});
-	
-	
-	$("table","#addForm,#modifyForm").attr("class","table-bordered");
-	var table = "table[class='table-bordered']";
-	$("tr:eq(0) > td",table).attr("style","border-top:0px");
-	$("tr > td:even",table).attr("bgcolor","#E0ECFF");
-	$("tr > td:nth-child(1)",table).attr("style","border-left:0px");
-	$("tr > td:eq(0)",table).attr("style","border-left:0px;border-top:0px;");
-	
+//	
+//	var default_option = "<option value=''>--请选择--</option>";
+//	var country = $("select[id$='countryCode']");
+//	country.html("");
+//	country.append(default_option);
+//	for (i = 0; i < _country.length; i++) {
+//		country.append("<option value="+_country[i].id+">"+_country[i].text+"</option>");
+//	}
+//	
+//	$("select[id$='areaCode'],select[id$='cityCode']").html(default_option);
+//	
+//	$("select[id$='countryCode'],select[id$='areaCode']").change(function(){
+//		   var value = $(this).val();
+//		   var targetId = $(this).attr("target");
+//		   var data = eval("_"+value);
+//		   $("#"+targetId).html(default_option);
+//		   for (i = 0; i < data.length; i++) {
+//				$("#"+targetId).append("<option value="+data[i].id+">"+data[i].text+"</option>");
+//			}
+//	});
+//	
+//	
+//	$("table","#addForm,#modifyForm").attr("class","table-bordered");
+//	var table = "table[class='table-bordered']";
+//	$("tr:eq(0) > td",table).attr("style","border-top:0px");
+//	$("tr > td:even",table).attr("bgcolor","#E0ECFF");
+//	$("tr > td:nth-child(1)",table).attr("style","border-left:0px");
+//	$("tr > td:eq(0)",table).attr("style","border-left:0px;border-top:0px;");
+//	
 });
 
 /**************************************************************************************************************/

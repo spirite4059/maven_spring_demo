@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<#include "/frame/pageInclude.html">
+<script type="text/javascript">
+	$(document).ready(function() {
+		grid = $('#tab').datagrid( {
+			url :'${base}/role/getSelectedUserByRoleId',
+			queryParams:$("#queryForm").serializeObject(),
+			rownumbers : true,
+			striped:true,
+			fit:true,
+			toolbar:'#toolbar',
+			fitColumns:true,
+			onLoadSuccess:function(row){//当表格成功加载时执行               
+                var rowData = row.rows;
+                $.each(rowData,function(index,val){//遍历JSON
+                      if(val.roleId!=-1){
+                        $("#tab").datagrid("selectRow", index);//如果数据行为已选中则选中改行
+                      }
+                });              
+            }
+		});
+	});
+	
+	function saveOk(){
+		var checked = $('#tab').datagrid('getChecked');
+		var userIds="";
+	    for(i=0;i<checked.length;i++){
+	    	userIds+=","+checked[i].id;
+	    }
+	    userIds = userIds.replace(",","");//已经勾选的id字符串
+		$.ajax({  
+		    url:'saveRoleUser',   
+		    data:
+		    {
+		    	roleId:$("#roleId").val(),
+		    	userIds:userIds
+		    },  
+		    type:'post',  
+		    dataType:'json',  
+		    success:function(data) { 
+		        if(data.status){
+		        	$.messager.alert('系统提示',"操作成功",'warning',function(){
+		        		closes();
+					});
+		        }else{
+		        	$.messager.alert('系统提示',"操作失败"+data.data,'error');
+		        } 
+		     } 
+		});
+	}
+	
+	function closes(){
+		parent.closeWin();
+	}
+</script>
+</head>
+<body>
+  
+   <table class="easyui-datagrid" id="tab">
+		<thead>
+			<tr>
+			    <th data-options="field:'id',checkbox:true">用户名</th>
+				<th data-options="field:'userName',width:80">用户名</th>
+				<th data-options="field:'realName',width:100">真实姓名</th>
+				<th data-options="field:'mobile',width:80">手机</th>
+				<th data-options="field:'email',width:100">邮箱</th>
+				<th data-options="field:'createTime',width:100,formatter:formatYYYYMMDD">创建日期</th>
+			</tr>
+		</thead>
+	</table>
+	
+	<div id="toolbar" style="padding:2px 5px;">
+		<form id="queryForm">
+		    <input type="hidden" name="roleId" id="roleId" value="${roleId}"/>
+			<a href="javascript:void(0);" onclick="saveOk();"class="easyui-linkbutton" iconCls="icon-ok">确定</a>
+			<a href="javascript:void(0);" onclick="closes();"class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
+		</form>
+	</div>
+ 
+</body>
+</html>

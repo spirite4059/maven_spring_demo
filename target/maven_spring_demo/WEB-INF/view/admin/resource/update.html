@@ -1,0 +1,88 @@
+<script type="text/javascript">
+	function modify(){   
+		var row = grid.treegrid('getSelected');
+          if(row){
+        	  modifyWin.window('open');
+        	  $('#modifyForm').form('load',row);
+        	  var p = grid.treegrid('getParent',row.id);
+        	  $("#_parentResourceName").val(p.text);
+          }
+    }   
+	
+	function modifyRow(row){
+		var row = grid.treegrid('getSelected');
+          if(row){
+        	  modifyWin.window('open');
+        	  $('#modifyForm').form('load',row);
+        	  var p = grid.treegrid('getParent',row.id);
+        	  $("#_parentResourceName").val(p.text);
+          }
+	}
+
+	function modifyCallback(data){
+		if(data.status){
+			modifyWin.window('close');
+		    grid.treegrid('reload',$("#queryForm").serializeObject());	
+		}else{
+		    $.messager.alert('警告',data.msg,'warning');
+		}
+	}
+	
+</script>
+<div id="modify-window" title="修改资源信息" class="easyui-window">
+	     <form id="modifyForm" method="post" >
+	    	<table cellpadding="5">
+	    		<tr>
+	    			<td>父级资源：
+	    			  <input type="hidden" id="parentId" name="parentId"/>
+	    			  <input type="hidden" id="id" name="id"/>
+	    			</td>
+	    			<td><input class="easyui-validatebox textbox" type="text" id="_parentResourceName" readonly="readonly"/></td>
+	    		</tr>
+	    		
+	    		<tr>
+	    			<td>资源名称：</td>
+	    			<td><input class="easyui-validatebox textbox" type="text" name="text" data-options="required:true"/><label style="color: red"> *</label></td>
+	    		</tr>
+	    		
+	    		<tr>
+	    			<td>资源地址：</td>
+	    			<td><input class="easyui-validatebox textbox" type="text" name="url"/></td>
+	    		</tr>
+	    		
+	    		<tr>
+	    			<td>是否菜单显示：</td>
+	    			<td>
+	    			   <input type="radio" name="isMenu" value="1" />是
+	    			   <input type="radio" name="isMenu" value="2" checked="checked"/>否
+	    			</td>
+	    		</tr>
+	    		
+	    		<tr>
+	    			<td>是否虚拟：</td>
+	    			<td>
+	    			   <input type="radio" name="isVirtual" value="1" />是
+	    			   <input type="radio" name="isVirtual" value="2" checked="checked"/>否
+	    			</td>
+	    		</tr>
+	    		
+	    		<tr>
+	    			<td>菜单样式：</td>
+	    			<td>
+	    			  <select id="up_menuCls" name="menuCls" class="easyui-combobox" data-options="required:true,editable:false,showItemIcon:true"  style="width:171px;"></select>
+	    			</td>
+	    		</tr>
+	    		
+	    		<tr>
+	    			<td>备注：</td>
+	    			<td colspan="3">
+	    			    <input class="easyui-textbox" name="remark" data-options="multiline:true" style="height:70px"/>
+	    			</td>
+	    		</tr>
+               </table>
+            </form>
+            <div style="text-align:center;padding:5px">
+   			   <a id="add_save" href="javascript:void(0)" class="easyui-linkbutton" onclick="modifySave('update');">保存</a>
+    	       <a href="javascript:void(0)" class="easyui-linkbutton" onclick="winClose()">关闭</a>
+	    	</div>
+    </div>

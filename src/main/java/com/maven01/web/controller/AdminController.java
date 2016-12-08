@@ -77,11 +77,15 @@ public class AdminController extends BaseController
     	Subject subject= SecurityUtils.getSubject();
     	User user = (User) subject.getPrincipal();		//在realm里面设置的
     	
-		session.setAttribute(SessionUtils.LOGIN_KEY, user);
+		session.setAttribute("loginUser", user);
+		
+		logger.debug("输出："+session.getAttribute("loginUser").toString());
     	
 		//realm里面也做了处理
 		if(session.getAttribute("resources")==null)
 		{	
+			logger.debug("index里面,session没做好资源处理");
+			
 			//可以直接返回数量就好了;主要还是realm里面已经有了
 			List<Resource> resourceList = resourceService.getUserResourceList(user.getId());
 			if(resourceList.size()>0){//表示有访问的资源
@@ -93,3 +97,7 @@ public class AdminController extends BaseController
     }
     
 }
+
+
+
+

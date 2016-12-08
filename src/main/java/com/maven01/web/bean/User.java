@@ -2,40 +2,25 @@ package com.maven01.web.bean;
 
 import java.util.Date;
 
-public class User {
-    private Integer id;
+public class User extends BaseB implements java.io.Serializable 
+{
+    //private Integer id;
+    private String userName;	
+    private String password;	
+    private String realName;	
+    private String mobile;		
+    private String email;		
+    private String remark;		
+    private Date createTime;	
+    private Integer status;		
+    private Integer roleId;		
 
-    private String userName;
 
-    private String password;
-
-    private String realName;
-
-    private String mobile;
-
-    private String email;
-
-    private String remark;
-
-    private Date createTime;
-
-    private Integer status;
-
-    private Integer roleId;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
+    public String getUserName() {
         return userName;
     }
 
-    public void setUsername(String userName) {
+    public void setUserName(String userName) {
         this.userName = userName == null ? null : userName.trim();
     }
 
@@ -47,11 +32,11 @@ public class User {
         this.password = password == null ? null : password.trim();
     }
 
-    public String getRealname() {
+    public String getRealName() {
         return realName;
     }
 
-    public void setRealname(String realName) {
+    public void setRealName(String realName) {
         this.realName = realName == null ? null : realName.trim();
     }
 
@@ -79,11 +64,11 @@ public class User {
         this.remark = remark == null ? null : remark.trim();
     }
 
-    public Date getCreatetime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreatetime(Date createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 

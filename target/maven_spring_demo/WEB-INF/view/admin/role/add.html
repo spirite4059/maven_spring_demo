@@ -1,0 +1,20 @@
+<div id="add-window" title="新增角色信息" class="easyui-window">
+	     <form id="addForm" method="post" >
+	    	<table cellpadding="5">
+	    		<tr>
+	    			<td>角色名称：</td>
+	    			<td><input class="easyui-validatebox textbox" type="text" name="roleName" data-options="required:true"/><label style="color: red"> *</label></td>
+	    		</tr>
+	    		<tr>
+	    			<td>备注：</td>
+	    			<td colspan="3">
+	    			    <input class="easyui-textbox" name="remark" data-options="multiline:true" style="height:70px"/>
+	    			</td>
+	    		</tr>
+               </table>
+            </form>
+            <div style="text-align:center;padding:5px">
+   			   <a id="add_save" href="javascript:void(0)" class="easyui-linkbutton" onclick="addSave('save');">保存</a>
+    	       <a href="javascript:void(0)" class="easyui-linkbutton" onclick="cancel()">关闭</a>
+	    	</div>
+    </div>
