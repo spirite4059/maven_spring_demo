@@ -14,7 +14,7 @@ import com.maven01.web.service.ResourceService;
 
 
 @Controller
-@RequestMapping("/resource")
+@RequestMapping("/admin/resource")
 public class ResourceController extends BaseController{
     
 	@Autowired
@@ -22,7 +22,7 @@ public class ResourceController extends BaseController{
 	
 	@RequestMapping("/gotoList")
 	public String gotoList(Model model) throws Exception{
-		return "resource/list";
+		return "admin/resource/list";
 	}
 	
 	

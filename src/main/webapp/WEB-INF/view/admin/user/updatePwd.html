@@ -1,0 +1,93 @@
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#updatePwdWindow").window({ 
+	        width:380,
+	        height:240
+		});
+		
+	});
+	function checkOldPwd(oldPwd){
+		var id = $("#userId").val();
+		if(oldPwd != null && oldPwd != ''){
+			$.ajax({  
+			    url:'${base}/user/checkOldPwd',   
+			    data:{  
+			    	id : id,
+			    	oldPwd : oldPwd
+			    },  
+			    type:'post',  
+			    dataType:'json',  
+			    success:function(data) { 
+			    	if(!data){
+			    		$.messager.alert('系统提示',"原密码不正确，请重新输入！",'warning');
+			    		$("#old_password").val('');
+			    	}
+			        
+			     },  
+			     error : function() {  
+			    	 $.messager.alert('系统提示',"异常！",'error');
+			     }  
+			});
+		}
+	}
+	//校验确认密码
+	function checkRetPassword(){
+		var psw = $("#password").val();
+		var r_psw = $("#ret_password").val();
+		if((psw == null || psw == "") && (r_psw != null && r_psw != "")){
+			alert("请先输入密码！");
+			$("#password").focus();
+			$("#ret_password").val('');
+		} else if((psw != null && psw != "") && (r_psw != null && r_psw != "") && psw != r_psw){
+			alert("两次输入的密码不一样!");
+			$("#ret_password").focus();
+			$("#ret_password").val('');
+		}
+	}
+	function summitUpdatePwd(){
+		var url = '${base}/user/update';
+		if($("#modifyForm").form('validate')){
+			$("#btn").linkbutton("disable");
+			$.post(url,$("#modifyForm").serializeObject(),updatPwdCallback,'json');		
+		}
+	}
+	function updatPwdCallback(data){
+		if(data.status){
+			$.messager.alert('系统提示',"修改成功",'warning',function(){
+				$("#updatePwdWindow").window('close');
+				location.href="logout";
+			});
+		}else{
+			$.messager.alert('系统提示',"修改失败"+data.data,'error');	
+		}
+	}
+	function cancel(){
+		   $("#updatePwdWindow").window('close');
+	   }
+</script>
+
+<div id="updatePwdWindow" title="修改密码" class="easyui-window" data-options="collapsible:false,minimizable:false,maximizable:false">
+	     <form id="modifyForm" method="post" >
+	    	<table>
+	    		<tr>
+	    			<td width="28%">旧密码：</td>
+	    			<td width="72%">
+	    				<input type="hidden" id="userId" name="id"/>
+	    				<input class="easyui-validatebox textbox" id="old_password" type="password" name="old_password" data-options="required:true" onBlur="checkOldPwd(this.value)"/><label style="color: red"> *</label>
+	    			</td>
+	    		</tr>
+	    		<tr>
+	    			<td width="28%">新密码：</td>
+	    			<td width="72%"><input class="easyui-validatebox textbox" id="password" type="password" name="password" data-options="required:true"/><label style="color: red"> *</label></td>
+	    		</tr>
+	    		<tr>
+	    			<td width="28%">确认密码：</td>
+	    			<td width="72%"><input class="easyui-validatebox textbox" id="ret_password" type="password" name="ret_password" onblur="checkRetPassword();" data-options="required:true" onBlur="checkRetPassword();"/><label style="color: red"> *</label></td>
+	    		</tr>
+               </table>
+              </form>
+            <div style="text-align:center;padding:5px">
+   			   <a id="btn" href="javascript:void(0)" class="easyui-linkbutton" onclick="summitUpdatePwd();">修改</a>
+    	       <a href="javascript:void(0)" class="easyui-linkbutton" onclick="cancel()">关闭</a>
+	    	</div>
+    </div>

@@ -4,8 +4,8 @@
 
 	<resultMap id="RoleUser" type="com.maven01.web.bean.RoleUser">  
 		<id property="id" column="id" />
-		<result property="roleId" column="role_id" />
-		<result property="userId" column="user_id" />
+		<result property="roleId" column="roleId" />
+		<result property="userId" column="userId" />
 	</resultMap>
 	
 	<insert id="insertAll" parameterType="java.util.List">

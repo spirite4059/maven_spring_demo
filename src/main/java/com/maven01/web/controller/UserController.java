@@ -75,18 +75,21 @@ public class UserController extends BaseController
 		return data;
 	}
 	
+	
+	//请求分页;easyui自动进行处理
 	@RequestMapping("/queryList")
 	@ResponseBody
-	public Map<String,Object> queryList(int page,int rows,User user) throws Exception{
+	public Map<String,Object> queryList(int page,int rows,User user) throws Exception
+	{
 		Map<String,Object> data = new HashMap<String,Object>();
 		
 		PageHelper.startPage(page, rows);
 		List<User> list = userService.getListByEntity(user);
 		PageInfo<User> pageInfo = new PageInfo<User>(list);
 		
-		data.put("rows", pageInfo.getList());
-		data.put("pageSize", pageInfo.getPageSize());
-		data.put("total", pageInfo.getTotal());
+		data.put("rows", 		pageInfo.getList());
+		data.put("pageSize", 	pageInfo.getPageSize());
+		data.put("total", 		pageInfo.getTotal());
 		return data;
 	}
 	
@@ -144,8 +147,10 @@ public class UserController extends BaseController
 		return result;
 	}
 	
-	
 }
+
+
+
 
 
 

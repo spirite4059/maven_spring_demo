@@ -29,6 +29,7 @@ public class TestUserService
 	@Autowired
 	private ResourceService resourceService;
 	
+	
 	@Test
 	public void testGetLeftMenu()
 	{

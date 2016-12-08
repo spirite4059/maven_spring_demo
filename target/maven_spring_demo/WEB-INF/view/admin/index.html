@@ -70,19 +70,21 @@
 	<#include "/user/updatePwd.html">
 	<script type="text/javascript">
 		$(function() {
-			$("#updatePwdWindow").window('close');
+			$("#updatePwdWindow").window('close');							//加载的另外一个用户密码账号窗口
+			
 			$('.vrs-side-tree a').bind("click", function() 
 			{
 				var title = $(this).text();
 				var url = $(this).attr('data-link');
 				var iconCls = $(this).attr('data-icon');
-				var iframe = $(this).attr('iframe') == 1 ? true : false;
+				var iframe = $(this).attr('iframe') == 1 ? true : false;  	//是否在主窗口的tab上添加iframe,user是添加了的
 				addTab(title, url, iconCls, iframe);
 			});
 
-			//init 
-			addTab('README', '${base}/user/gotoUpgradeIndex', 'icon-system-help', true);
+			//init 刚开始加载一个基础的说明页面
+			addTab('README', '${base}/admin/user/gotoUpgradeIndex', 'icon-system-help', true);
 			
+			//给tabs添加右键弹出菜单
 			$("#vrs-tabs").bind('contextmenu',function(e){
 		        e.preventDefault();
 		        $('#contextmenu').menu('show', {
@@ -92,8 +94,8 @@
 		    });
 			 
 		    $("#closeself").bind("click",function(){
-		        var tab = $('#vrs-tabs').tabs('getSelected');
-		        var index = $('#vrs-tabs').tabs('getTabIndex',tab);
+		        var tab 	= $('#vrs-tabs').tabs('getSelected');
+		        var index 	= $('#vrs-tabs').tabs('getTabIndex',tab);
 		        $('#vrs-tabs').tabs('close',index);
 		    });
 		    
@@ -117,6 +119,7 @@
 		        }
 		    });
 		    
+		    //对表格的一些特征做了处理
 		    $("table","#addForm,#modifyForm").attr("class","table-bordered");
 			var table = "table[class='table-bordered']";
 			$("tr:eq(0) > td",table).attr("style","border-top:0px");
@@ -134,7 +137,8 @@
 		 */
 		function addTab(title, href, iconCls, iframe) {
 			var tabPanel = $('#vrs-tabs');
-			if (!tabPanel.tabs('exists', title)) {
+			if (!tabPanel.tabs('exists', title)) 
+			{
 				var content = '<iframe marginheight="0" marginwidth="0" frameborder="0" src="'
 						+ href + '" height="100%" width="100%"></iframe>';
 				if (iframe) {
@@ -156,11 +160,13 @@
 						closable : true
 					});
 				}
-			} else {
+			} else {	
+				//在tab里面有没有这个title，有就直接跳转选择这个页面
 				tabPanel.tabs('select', title);
 			}
 		}
 
+		//关闭选择的tab
 		function removeSelectedTab() {
 			var tabPanel = $('#vrs-tabs');
 			var tab = tabPanel.tabs('getSelected');

@@ -95,11 +95,11 @@ public class User {
         this.status = status;
     }
 
-    public Integer getRoleid() {
+    public Integer getRoleId() {
         return roleId;
     }
 
-    public void setRoleid(Integer roleId) {
+    public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
 }

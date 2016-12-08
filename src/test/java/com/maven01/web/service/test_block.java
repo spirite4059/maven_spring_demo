@@ -14,6 +14,8 @@ import com.maven01.web.bean.ArticleBlock;
 import com.maven01.web.bean.PageInfoM;
 import com.maven01.web.dao.ArticleBlockDao;
 import com.maven01.web.dao.ArticleDao;
+import com.maven01.web.util.util;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -29,6 +31,23 @@ public class test_block
 	
 	@Autowired
 	private ArticleDao articleDao;					//文章的数据操作类
+	
+	
+	@Autowired
+	private ArticleBlockService articleBlockService;		//文章块的数据操作类
+	
+	@Test
+	public void insertBlock() throws Exception
+	{	
+		ArticleBlock block1=new ArticleBlock();
+		block1.setBlockContent("");
+		block1.setArticleId(48);
+		block1.setBlockType(0);		//文章块是文字
+		block1.setDate(util.getNowDate());
+		
+		//插入
+		articleBlockService.insertBlock(4, block1);
+	}
 	
 	
 //	@Test
@@ -229,67 +248,67 @@ public class test_block
 
 
 	//删除某一个block块
-	@Test
-	public void deleteBlock() throws Exception
-	{
-		int block_id=13;	//要删除的block块
-		int article_id=48;
-		
-		Article article= articleDao.getEntityById(article_id);
-		if(article == null) throw new Exception("没选择有效的文章");
-		
-		 
-		//获取article list用#区分,第一个#去掉 
-		String blockListStr = article.getArticleList();
-		List<Integer> blockLink = new LinkedList<Integer>();		
-		
-		
-		//字符串是空的,
-		if(blockListStr!=null && !blockListStr.equals(""))
-		{
-			//用#!来切分字符串
-			String[] tmp_array=blockListStr.split("#");
-			for(int i=0;i<tmp_array.length;i++)	
-			{
-				if(!tmp_array[i].equals(""))
-				{
-					blockLink.add( Integer.valueOf(tmp_array[i]));
-				}
-			}
-			
-			if(blockLink.size()<=0) throw new Exception("文章没有有效文章块");
-			
-			boolean is_find=false;
-			for(Integer elem:blockLink)
-			{
-				//这块是可以直接删除的
-				if(elem==block_id) 
-				{
-					blockLink.remove(elem);
-					is_find=true;
-					break;
-				}
-			} 
-			
-			if(is_find)	 //如果找到了的话 
-			{
-				//数值转成字符串，然后输出
-				blockListStr="";
-				for(Integer elem:blockLink)	
-				{
-					blockListStr+="#"+elem;			//把一块一块拼成一个整体
-				}
-				
-				//更新到数据库里面去
-				//是之前已经选择出的数据
-				article.setArticleList(blockListStr);
-				articleDao.update(article);
-				
-				
-				//删除文章块
-				articleBlockDao.deleteById(block_id);	
-				
-			}else throw new Exception("没有可删除的文章块");	
-		}
-	}
+//	@Test
+//	public void deleteBlock() throws Exception
+//	{
+//		int block_id=13;	//要删除的block块
+//		int article_id=48;
+//		
+//		Article article= articleDao.getEntityById(article_id);
+//		if(article == null) throw new Exception("没选择有效的文章");
+//		
+//		 
+//		//获取article list用#区分,第一个#去掉 
+//		String blockListStr = article.getArticleList();
+//		List<Integer> blockLink = new LinkedList<Integer>();		
+//		
+//		
+//		//字符串是空的,
+//		if(blockListStr!=null && !blockListStr.equals(""))
+//		{
+//			//用#!来切分字符串
+//			String[] tmp_array=blockListStr.split("#");
+//			for(int i=0;i<tmp_array.length;i++)	
+//			{
+//				if(!tmp_array[i].equals(""))
+//				{
+//					blockLink.add( Integer.valueOf(tmp_array[i]));
+//				}
+//			}
+//			
+//			if(blockLink.size()<=0) throw new Exception("文章没有有效文章块");
+//			
+//			boolean is_find=false;
+//			for(Integer elem:blockLink)
+//			{
+//				//这块是可以直接删除的
+//				if(elem==block_id) 
+//				{
+//					blockLink.remove(elem);
+//					is_find=true;
+//					break;
+//				}
+//			} 
+//			
+//			if(is_find)	 //如果找到了的话 
+//			{
+//				//数值转成字符串，然后输出
+//				blockListStr="";
+//				for(Integer elem:blockLink)	
+//				{
+//					blockListStr+="#"+elem;			//把一块一块拼成一个整体
+//				}
+//				
+//				//更新到数据库里面去
+//				//是之前已经选择出的数据
+//				article.setArticleList(blockListStr);
+//				articleDao.update(article);
+//				
+//				
+//				//删除文章块
+//				articleBlockDao.deleteById(block_id);	
+//				
+//			}else throw new Exception("没有可删除的文章块");	
+//		}
+//	}
 }

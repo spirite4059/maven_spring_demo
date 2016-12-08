@@ -1,4 +1,12 @@
-#Tue Nov 29 22:52:43 CST 2016
+#Thu Dec 08 08:50:18 CST 2016
 eclipse.preferences.version=1
 encoding//src/main/resources/log4j.properties=UTF-8
+encoding//src/main/webapp/WEB-INF/view/admin/resource/add.html=UTF-8
+encoding//src/main/webapp/WEB-INF/view/admin/resource/update.html=UTF-8
+encoding//src/main/webapp/WEB-INF/view/admin/role/add.html=UTF-8
+encoding//src/main/webapp/WEB-INF/view/admin/role/selectUser.html=UTF-8
+encoding//src/main/webapp/WEB-INF/view/admin/role/update.html=UTF-8
+encoding//src/main/webapp/WEB-INF/view/admin/user/add.html=UTF-8
+encoding//src/main/webapp/WEB-INF/view/admin/user/update.html=UTF-8
+encoding//src/main/webapp/WEB-INF/view/admin/user/updatePwd.html=UTF-8
 encoding/<project>=UTF-8

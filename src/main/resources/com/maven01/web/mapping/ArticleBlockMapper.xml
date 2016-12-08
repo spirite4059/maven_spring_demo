@@ -81,7 +81,8 @@
 	</insert>
 	
 	
-	<insert id="insertAndGetId" useGeneratedKeys="true" keyProperty="blockId" parameterType="com.maven01.web.bean.ArticleBlock">
+	<insert id="insertAndGetId" useGeneratedKeys="true" keyProperty="blockId" 
+			parameterType="com.maven01.web.bean.ArticleBlock">
 		insert into article_block ( article_id, block_type ,block_content , date)
     	values 
     	(	

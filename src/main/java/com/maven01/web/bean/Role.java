@@ -3,7 +3,7 @@ package com.maven01.web.bean;
 public class Role 
 {	
     private Integer id;
-    private String rolename;
+    private String roleName;
     private String remark;
     
     public Integer getId() {
@@ -14,12 +14,12 @@ public class Role
         this.id = id;
     }
 
-    public String getRolename() {
-        return rolename;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setRolename(String rolename) {
-        this.rolename = rolename == null ? null : rolename.trim();
+    public void setRolename(String roleName) {
+        this.roleName = roleName == null ? null : roleName.trim();
     }
 
     public String getRemark() {

@@ -15,6 +15,7 @@ import com.maven01.web.dao.ArticleDao;
 import com.maven01.web.dao.ArticlePostDao;
 import com.maven01.web.dao.BaseDao;
 import com.maven01.web.service.ArticleBlockService;
+import com.maven01.web.util.util;
 
 @Service
 public class ArticleBlockServiceImp extends BaseServiceImp <ArticleBlock> implements ArticleBlockService
@@ -138,10 +139,11 @@ public class ArticleBlockServiceImp extends BaseServiceImp <ArticleBlock> implem
 	{	
 		
 //		ArticleBlock block1=new ArticleBlock();
+//		block1.setBlockId(-1);
 //		block1.setBlockContent("");
 //		block1.setArticleId(48);
 //		block1.setBlockType(0);		//文章块是文字
-		//int inputIndex = 10;	//block的位置，第一次就插入-1
+//		block1.setDate(util.getNowDate());
 		
 		
 		int articleId  = block1.getArticleId();   
@@ -154,11 +156,11 @@ public class ArticleBlockServiceImp extends BaseServiceImp <ArticleBlock> implem
 		else   
 			throw new Exception("没选择有效的文章");
 		
-		
+		//logger.debug("之前id:"+block1.getBlockId());
 		//当前的articleBlock块,保存并返回id数值
-		 articleBlockDao.insertAndGetId(block1);
-		 int current_id = block1.getBlockId();	//插入后返回正确的数值
-		
+		articleBlockDao.insertAndGetId(block1);
+	    int current_id = block1.getBlockId();	//插入后返回正确的数值
+		//logger.debug("获得id:"+block1.getBlockId());
 		 
 		//获取article list用#区分,第一个#去掉 
 		String blockListStr = article1.getArticleList();

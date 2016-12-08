@@ -3,8 +3,8 @@ package com.maven01.web.bean;
 public class RoleUser 
 {
     private Integer id;
-    private Integer roleid;
-    private Integer userid;
+    private Integer roleId;
+    private Integer userId;
 
     public Integer getId() {
         return id;		
@@ -14,20 +14,20 @@ public class RoleUser
         this.id = id;		
     }
 
-    public Integer getRoleid() {
-        return roleid;   	
+    public Integer getRoleId() {
+        return roleId;   	
     }
 
-    public void setRoleid(Integer roleid) {
-        this.roleid = roleid;	
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;	
     }
 
-    public Integer getUserid() {
-        return userid;		
+    public Integer getUserId() {
+        return userId;		
     }
 
-    public void setUserid(Integer userid) {
-        this.userid = userid;
+    public void setUserId(Integer userid) {
+        this.userId = userid;
     }
     
 }

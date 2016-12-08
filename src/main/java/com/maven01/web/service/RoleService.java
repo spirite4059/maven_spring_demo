@@ -1,11 +1,9 @@
 package com.maven01.web.service;
 
-
 import java.util.List;
 import com.maven01.web.bean.Role;
 import com.maven01.web.bean.RoleResource;
 import com.maven01.web.bean.User;
-
 
 public interface RoleService extends BaseService<Role> 
 {
@@ -17,9 +15,12 @@ public interface RoleService extends BaseService<Role>
 	public List<User> getSelectedUserByRoleId(int roleId)throws Exception;
 	
 	//保存分配的资源
-	public void saveRoleResource(String resourceIds,int roleId)throws Exception;
+	public void insertRoleResource(String resourceIds,int roleId)throws Exception;
 	
 	//保存分配的用户
-   public void saveRoleUser(String userIds,int roleId)throws Exception;
+    public void insertRoleUser(String userIds,int roleId)throws Exception;
 
 }
+
+
+
